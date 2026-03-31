@@ -15,5 +15,32 @@
         "content": "<h3 class=\"subsubsection-title\">产品布局</h3>\n<ul>\n<li>所有商品集中于游戏ID/昵称类虚拟身份交易</li>\n<li>主要交易品类包括：单字ID、二字ID、极品昵称、稀有名字</li>\n<li>市场呈现ID交易单一品类垄断态势</li>\n</ul>"
       }
     ]
+  },
+  {
+    "date": "2026年3月23日",
+    "competitors": [
+      {
+        "name": "竞品二：盼之",
+        "content": "<h4 style=\"color: #5a67d8; margin: 15px 0 10px 0;\">新英雄内容发布</h4>\n<p>KOL“长安司剑”发布新英雄PV及“伽罗”角色介绍相关内容，获得171次互动。</p>"
+      }
+    ]
+  },
+  {
+    "date": "2026年3月20日",
+    "competitors": [
+      {
+        "name": "竞品二：盼之",
+        "content": "<h4 style=\"color: #5a67d8; margin: 15px 0 10px 0;\">跨游戏话题联动</h4>\n<p>KOL“长安司剑”发布内容，将《王者荣耀世界》与《洛克王国世界》进行跨游戏对比讨论，获得191次互动。</p>"
+      }
+    ]
+  },
+  {
+    "date": "2026年3月10日",
+    "competitors": [
+      {
+        "name": "竞品二：盼之",
+        "content": "<h4 style=\"color: #5a67d8; margin: 15px 0 10px 0;\">游戏内购争议</h4>\n<p>抖音KOL“长安司剑”发布视频《什么皮肤敢卖2400？》引发热议，互动量达2609次。</p>"
+      }
+    ]
   }
 ]
