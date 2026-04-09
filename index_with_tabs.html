@@ -1755,7 +1755,7 @@
             console.log(`初始化日期标签：今天是 ${month}月${day}日 (ID: ${todayId})`);
             
             // 初始化竞品动态追踪
-            const competitorContent = document.getElementById('competitor-' + todayId);
+            let competitorContent = document.getElementById('competitor-' + todayId);
             if (competitorContent) {
                 // 隐藏所有竞品内容
                 document.querySelectorAll('.competitor-date-content').forEach(c => c.classList.remove('active'));
@@ -1771,11 +1771,22 @@
                 });
                 console.log(`✓ 竞品动态追踪已设置为 ${month}月${day}日`);
             } else {
-                console.log(`⚠ 未找到 ${month}月${day}日 的竞品内容，使用默认`);
+                console.log(`⚠ 未找到 ${month}月${day}日 的竞品内容，回退到最新日期`);
+                // 回退到第一个可用的内容（通常是最新的）
+                const firstCompetitorContent = document.querySelector('.competitor-date-content');
+                if (firstCompetitorContent) {
+                    firstCompetitorContent.classList.add('active');
+                    // 激活第一个按钮
+                    const firstTab = document.querySelector('#competitor-date-tabs .date-tab');
+                    if (firstTab) {
+                        firstTab.classList.add('active');
+                    }
+                    console.log(`✓ 竞品动态追踪已回退到最新可用日期`);
+                }
             }
             
             // 初始化用户需求追踪
-            const userFeedbackContent = document.getElementById('user-feedback-' + todayId);
+            let userFeedbackContent = document.getElementById('user-feedback-' + todayId);
             if (userFeedbackContent) {
                 // 隐藏所有用户反馈内容
                 document.querySelectorAll('.user-feedback-date-content').forEach(c => c.classList.remove('active'));
@@ -1791,7 +1802,18 @@
                 });
                 console.log(`✓ 用户需求追踪已设置为 ${month}月${day}日`);
             } else {
-                console.log(`⚠ 未找到 ${month}月${day}日 的用户需求内容，使用默认`);
+                console.log(`⚠ 未找到 ${month}月${day}日 的用户需求内容，回退到最新日期`);
+                // 回退到第一个可用的内容（通常是最新的）
+                const firstUserFeedbackContent = document.querySelector('.user-feedback-date-content');
+                if (firstUserFeedbackContent) {
+                    firstUserFeedbackContent.classList.add('active');
+                    // 激活第一个按钮
+                    const firstTab = document.querySelector('#user-feedback-date-tabs .date-tab');
+                    if (firstTab) {
+                        firstTab.classList.add('active');
+                    }
+                    console.log(`✓ 用户需求追踪已回退到最新可用日期`);
+                }
             }
         }
         
