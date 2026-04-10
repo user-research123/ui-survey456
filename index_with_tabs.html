@@ -1938,11 +1938,11 @@
 
         // 页面加载时初始化：只显示最新日期的内容
         function initDateTabs() {
-            // 竞品动态追踪：只保留 04-09 的 active 状态
+            // 竞品动态追踪：只保留 04-10 的 active 状态
             document.querySelectorAll('.competitor-date-content').forEach(el => {
                 el.classList.remove('active');
             });
-            const latestCompetitor = document.getElementById('competitor-04-09');
+            const latestCompetitor = document.getElementById('competitor-04-10');
             if (latestCompetitor) {
                 latestCompetitor.classList.add('active');
             }
