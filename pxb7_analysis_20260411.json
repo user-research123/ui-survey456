@@ -1,0 +1,47 @@
+{
+  "analysis_date": "2026-04-11",
+  "total_products": 112,
+  "product_types": [
+    "账号"
+  ],
+  "price_analysis": {
+    "min_price": 60,
+    "max_price": 999999,
+    "median_price": 550,
+    "avg_price": 12449,
+    "high_value_count": 5,
+    "high_value_percentage": 4.5
+  },
+  "price_ranges": {
+    "0-500": {
+      "count": 45,
+      "percentage": 40.2
+    },
+    "500-1000": {
+      "count": 48,
+      "percentage": 42.9
+    },
+    "1000-5000": {
+      "count": 13,
+      "percentage": 11.6
+    },
+    "5000-10000": {
+      "count": 1,
+      "percentage": 0.9
+    },
+    "10000以上": {
+      "count": 5,
+      "percentage": 4.5
+    }
+  },
+  "platform_distribution": {
+    "QQ": {
+      "count": 105,
+      "percentage": 93.8
+    },
+    "微信": {
+      "count": 7,
+      "percentage": 6.2
+    }
+  }
+}
