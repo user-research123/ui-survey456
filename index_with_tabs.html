@@ -1820,8 +1820,52 @@
                 </div>
 
 
+                <!-- 4月12日内容 -->
+                <div id="user-feedback-04-12" class="user-feedback-date-content active">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">4月12日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <span class="channel-tag">渠道：微博</span>
+                                    <h3 class="subsubsection-title">微博舆情分析（前 5 页共 60 条帖子）</h3>
+
+<h4 style="color: #5a67d8; margin: 15px 0 10px 0;">用户关注点分布</h4>
+<ul>
+<li>未分类 (60.0%, 36 条) - 其他未分类内容</li>
+<li>同人创作 (18.3%, 11 条) - 同人画作、小说、视频等创作</li>
+<li>组队社交 (5.0%, 3 条) - 寻找队友、公会招募等社交需求</li>
+<li>道具交易 (3.3%, 2 条) - 账号、ID、道具等交易行为</li>
+<li>游戏攻略 (3.3%, 2 条) - 新手教程、玩法技巧</li>
+<li>游戏内容 (3.3%, 2 条) - 时装、皮肤、副本、职业等游戏内内容</li>
+<li>游戏资讯 (3.3%, 2 条) - 官方爆料、更新预告等资讯</li>
+<li>水贴/其他 (1.7%, 1 条) - 打卡、签到等日常互动</li>
+<li>代练代肝 (1.7%, 1 条) - 代练、代肝等服务需求</li>
+</ul>
+
+<h4 style="color: #5a67d8; margin: 15px 0 10px 0;">核心发现</h4>
+<ul>
+<li>服务类需求明显：代练代肝(1.7%)和道具交易(3.3%)合计占5.0%</li>
+<li>社交属性突出：组队社交类占比5.0%</li>
+<li>内容消费活跃：游戏攻略和资讯类合计占6.7%</li>
+</ul>
+
+<h4 style="color: #5a67d8; margin: 15px 0 10px 0;">典型帖子示例</h4>
+<ul>
+<li><strong>组队社交：</strong>"随着KSG春季赛夺冠，2026年电竞世界杯EWC王者荣耀赛事KPL赛区两个出征战队确定为AG和KSG", "《王者荣耀世界》是王者IP下的全新多人冒险游戏，让你以主角身份自由逛遍王者大陆"</li>
+<li><strong>游戏攻略：</strong>"#王者荣耀世界# 上课了(•̀ᴗ•́)و̑̑ 教程合集来了，请反复听并且需要严肃认真学。星辰之子•东方曜凭借其多变的流技组合..."</li>
+<li><strong>代练代肝：</strong>"代肝洛克王国世界超话◆这里川川，全职成年女代代 💖 ◆信誉图：川川的信誉图（已结3000+）...可接范围：王者荣耀世界..."</li>
+<li><strong>道具交易：</strong>"#王者元流之子武器特效##王者荣耀王者世界联动#王者荣耀与王者荣耀世界联动将于4月10日正式开启..."</li>
+<li><strong>游戏内容：</strong>"看了下王者荣耀世界的体验视频，基本全是评价拉完了。几个大的槽点。一个是究极缝合怪...二个是动画巨多，不能跳过..."</li>
+</ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 4月11日内容 -->
-                <div id="user-feedback-04-11" class="user-feedback-date-content active">
+                <div id="user-feedback-04-11" class="user-feedback-date-content">
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-date">4月11日</div>
@@ -2360,11 +2404,11 @@
                 latestCompetitorBtn.classList.add('active');
             }
             
-            // 用户需求追踪：只保留 04-11 的 active 状态
+            // 用户需求追踪：只保留 04-12 的 active 状态
             document.querySelectorAll('.user-feedback-date-content').forEach(el => {
                 el.classList.remove('active');
             });
-            const latestFeedback = document.getElementById('user-feedback-04-11');
+            const latestFeedback = document.getElementById('user-feedback-04-12');
             if (latestFeedback) {
                 latestFeedback.classList.add('active');
             }
