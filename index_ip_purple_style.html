@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀世界 - 市场监控日报（紫晶色 IP 风）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #2d1b4e 0%, #4b2c6e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border-top: 5px solid #9966cc;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #9966cc 0%, #dda0dd 100%);
+            color: #2d1b4e;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #2d1b4e, transparent);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .date {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px 30px;
+            background: linear-gradient(180deg, #fff 0%, #f8f0ff 100%);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2d1b4e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #9966cc;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .subsubsection-title {
+            font-size: 1.3em;
+            color: #4b2c6e;
+            margin: 20px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #f8f0ff 0%, #f0e0ff 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid #9966cc;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .summary-box p {
+            color: #2d1b4e;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .competitor-card {
+            background: linear-gradient(135deg, #f8f0ff 0%, #f0e0ff 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid #9966cc;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+            border-color: #dda0dd;
+        }
+
+        .competitor-name {
+            font-size: 1.4em;
+            color: #2d1b4e;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9966cc;
+        }
+
+        .channel-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #2d1b4e 0%, #4b2c6e 100%);
+            color: #dda0dd;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-weight: 500;
+            border: 1px solid #9966cc;
+        }
+
+        .competitor-card ul {
+            margin-left: 0;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #4b2c6e;
+        }
+
+        li ul {
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+
+        p {
+            color: #4b2c6e;
+            margin-bottom: 10px;
+        }
+
+        .event-item {
+            background: linear-gradient(135deg, #f8f0ff 0%, #f0e0ff 100%);
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #9966cc;
+            border: 1px solid #9966cc;
+        }
+
+        .event-time {
+            font-weight: 600;
+            color: #2d1b4e;
+            margin-right: 10px;
+        }
+
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #9966cc 0%, #dda0dd 100%);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #dda0dd;
+            border: 3px solid #2d1b4e;
+            z-index: 1;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+        }
+
+        .timeline-date {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2d1b4e;
+            margin-bottom: 10px;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #f8f0ff 0%, #f0e0ff 100%);
+            border-radius: 6px;
+            display: block;
+            width: fit-content;
+            margin-left: 24px;
+            border: 2px solid #9966cc;
+        }
+
+        .timeline-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            border: 2px solid #9966cc;
+            margin-top: 10px;
+            margin-left: 24px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            text-align: center;
+            color: #495057;
+            border-top: 3px solid #9966cc;
+        }
+
+        /* 日期切换按钮样式 */
+        .date-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            margin-left: 24px;
+            flex-wrap: wrap;
+        }
+
+        .date-tab {
+            padding: 10px 20px;
+            border: 2px solid #2d1b4e;
+            background: white;
+            color: #2d1b4e;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .date-tab:hover {
+            background: linear-gradient(135deg, #f8f0ff 0%, #f0e0ff 100%);
+            transform: translateY(-2px);
+            border-color: #9966cc;
+        }
+
+        .date-tab.active {
+            background: linear-gradient(135deg, #9966cc 0%, #dda0dd 100%);
+            color: #2d1b4e;
+            border-color: #9966cc;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            font-weight: 600;
+        }
+
+        .date-content {
+            display: none;
+        }
+
+        .date-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .competitor-card {
+                padding: 20px;
+            }
+
+            .date-tabs {
+                gap: 8px;
+            }
+
+            .date-tab {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+        }
+    
+        /* 独立的日期内容区块 */
+        .competitor-date-content {
+            display: none;
+        }
+        
+        .competitor-date-content.active {
+            display: block;
+        }
+        
+        .user-feedback-date-content {
+            display: none;
+        }
+        
+        .user-feedback-date-content.active {
+            display: block;
+        }
+
+        /* 榜单曲线图样式 */
+        #rank-chart-container {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        #rank-chart-container svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .chart-tooltip {
+            position: absolute;
+            background: rgba(30, 60, 114, 0.95);
+            color: #dda0dd;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+            border: 1px solid #9966cc;
+        }
+        
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .chart-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .chart-legend-color {
+            width: 20px;
+            height: 3px;
+        }
+        
+        .chart-data-source {
+            text-align: center;
+            color: #6c757d;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>王者荣耀世界 - 市场监控日报</h1>
+            <div class="date">每日更新 · 竞品动态追踪</div>
+        </div>
+
+        <div class="content">
+            <!-- 总结部分 -->
+            <div class="section">
+                <h2 class="section-title">总结</h2>
+                <div class="section-content">
+                    4 月 7 日总结<br>官方活动：《王者荣耀世界》PC 端预下载将于 4 月 7 日上午 10:00 开启<br>竞品动态：<br>- 螃蟹：迅速跟进热门、单双字及角色 ID 的账号交易服务，并提供代练业务。其中账号价格区间：大部分集中在 1000-5000 元（占 26%）<br>- 盼之：跟进账号和代练业务，价格分布：以 500-1000 元为主（占 39%）<br>- 闲鱼：提供代练、账号、抢注等服务，大部分集中在 1000 元以上（占 79%），个人卖家居多，交易活跃<br>用户需求：微博舆情分析<br>核心关注点：游戏攻略 (18%)、同人创作 (16%)；服务类需求：代练代肝 (10%) + 道具交易 (13%) = 23%，反映玩家对省时省力和资源获取的明显需求
+                </div>
+            </div>
+            
+            <!-- 榜单曲线图 -->
+            <div class="section">
+                <h2 class="section-title">云·王者荣耀世界 - 游戏 (免费) 榜单曲线图</h2>
+                <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">数据统计周期：2026-04-01 至 2026-04-07</p>
+                
+                <div class="chart-legend">
+                    <div class="chart-legend-item">
+                        <div class="chart-legend-color" style="background-color: #91CC75;"></div>
+                        <span>游戏 (免费)</span>
+                    </div>
+                </div>
+                
+                <div id="rank-chart-container">
+                    <!-- Chart will be rendered here -->
+                </div>
+                
+                <div class="chart-data-source">数据来源：七麦数据</div>
+            </div>
+
+            <!-- 用户反馈部分 -->
+            <div class="section">
+                <h2 class="section-title">用户需求追踪</h2>
+                
+                <div class="date-tabs">
+                    <button class="date-tab active" onclick="showDate('04-07')">4 月 7 日</button>
+                    <button class="date-tab" onclick="showDate('04-06')">4 月 6 日</button>
+                    <button class="date-tab" onclick="showDate('04-05')">4 月 5 日</button>
+                    <button class="date-tab" onclick="showDate('04-04')">4 月 4 日</button>
+                    <button class="date-tab" onclick="showDate('04-03')">4 月 3 日</button>
+                </div>
+
+                <div class="date-content active" id="date-04-07">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 7 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="competitor-name">小红书舆情热点</div>
+                                    <ul>
+                                        <li><strong>ID 抢注攻略：</strong>分享如何抢到好听的游戏 ID，包括单字、双字、稀有词组等命名技巧</li>
+                                        <li><strong>极品 ID 稀缺性讨论：</strong>玩家热议稀有 ID 的价值，认为好的 ID 在游戏中具有社交价值和收藏价值</li>
+                                        <li><strong>公测时间传播：</strong>关于游戏公测时间的讨论和猜测，玩家期待尽快上线</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="competitor-name">微博舆情分类占比</div>
+                                    <p>基于 90+ 条微博样本分析：</p>
+                                    <ul>
+                                        <li>游戏攻略：18%</li>
+                                        <li>同人创作：16%</li>
+                                        <li>社交互动：15%</li>
+                                        <li>游戏资讯：14%</li>
+                                        <li>道具交易：13%</li>
+                                        <li>代练代肝：10%</li>
+                                        <li>游戏内容：8%</li>
+                                        <li>游戏技术：4%</li>
+                                        <li>水贴：2%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="date-content" id="date-04-06">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 6 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="competitor-name">小红书舆情热点</div>
+                                    <ul>
+                                        <li><strong>预约奖励攻略：</strong>分享预约里程碑奖励的领取方式和最优策略</li>
+                                        <li><strong>职业选择讨论：</strong>玩家讨论各职业特点，寻求组队搭配建议</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="date-content" id="date-04-05">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 5 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="competitor-name">小红书舆情热点</div>
+                                    <ul>
+                                        <li><strong>测试资格晒单：</strong>幸运玩家分享获得测试资格的喜悦</li>
+                                        <li><strong>游戏画面赏析：</strong>实机演示视频片段传播，玩家称赞画面表现</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="date-content" id="date-04-04">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 4 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="competitor-name">小红书舆情热点</div>
+                                    <ul>
+                                        <li><strong>世界观解析：</strong>深度解读游戏背景故事和角色设定</li>
+                                        <li><strong>音乐 OST 讨论：</strong>玩家对游戏原声音乐的期待和分享</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="date-content" id="date-04-03">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 3 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="competitor-name">小红书舆情热点</div>
+                                    <ul>
+                                        <li><strong>新英雄爆料：</strong>关于可操作英雄角色的猜测和期待</li>
+                                        <li><strong>玩法系统前瞻：</strong>讨论 PVP、PVE 等核心玩法设计</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 竞品动态追踪部分 -->
+            <div class="section">
+                <h2 class="section-title">竞品动态追踪</h2>
+                
+                <div class="date-tabs">
+                    <button class="date-tab active" onclick="showCompetitorDate('04-07')">4 月 7 日</button>
+                    <button class="date-tab" onclick="showCompetitorDate('04-06')">4 月 6 日</button>
+                    <button class="date-tab" onclick="showCompetitorDate('04-05')">4 月 5 日</button>
+                    <button class="date-tab" onclick="showCompetitorDate('04-04')">4 月 4 日</button>
+                    <button class="date-tab" onclick="showCompetitorDate('04-03')">4 月 3 日</button>
+                </div>
+
+                <div class="competitor-date-content active" id="competitor-date-04-07">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 7 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="channel-tag">螃蟹账号平台</div>
+                                    <div class="competitor-name">竞品：螃蟹</div>
+                                    <ul>
+                                        <li>业务类型：账号交易、代练服务</li>
+                                        <li>价格区间：1000-5000 元（占 26%）</li>
+                                        <li>特点：迅速跟进热门 ID、单双字及角色 ID 交易</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">盼之代售</div>
+                                    <div class="competitor-name">竞品：盼之</div>
+                                    <ul>
+                                        <li>业务类型：账号交易、代练服务</li>
+                                        <li>价格区间：500-1000 元（占 39%）</li>
+                                        <li>特点：中低价位账号交易活跃</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">闲鱼二手</div>
+                                    <div class="competitor-name">竞品：闲鱼</div>
+                                    <ul>
+                                        <li>业务类型：代练、账号、抢注服务</li>
+                                        <li>价格区间：1000 元以上（占 79%）</li>
+                                        <li>特点：个人卖家居多，交易活跃</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="competitor-date-content" id="competitor-date-04-06">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 6 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="channel-tag">螃蟹账号平台</div>
+                                    <div class="competitor-name">竞品：螃蟹</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">盼之代售</div>
+                                    <div class="competitor-name">竞品：盼之</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">闲鱼二手</div>
+                                    <div class="competitor-name">竞品：闲鱼</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="competitor-date-content" id="competitor-date-04-05">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 5 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="channel-tag">螃蟹账号平台</div>
+                                    <div class="competitor-name">竞品：螃蟹</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">盼之代售</div>
+                                    <div class="competitor-name">竞品：盼之</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">闲鱼二手</div>
+                                    <div class="competitor-name">竞品：闲鱼</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="competitor-date-content" id="competitor-date-04-04">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 4 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="channel-tag">螃蟹账号平台</div>
+                                    <div class="competitor-name">竞品：螃蟹</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">盼之代售</div>
+                                    <div class="competitor-name">竞品：盼之</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">闲鱼二手</div>
+                                    <div class="competitor-name">竞品：闲鱼</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="competitor-date-content" id="competitor-date-04-03">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">4 月 3 日</span>
+                            <div class="timeline-content">
+                                <div class="competitor-card">
+                                    <div class="channel-tag">螃蟹账号平台</div>
+                                    <div class="competitor-name">竞品：螃蟹</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">盼之代售</div>
+                                    <div class="competitor-name">竞品：盼之</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="competitor-card">
+                                    <div class="channel-tag">闲鱼二手</div>
+                                    <div class="competitor-name">竞品：闲鱼</div>
+                                    <ul>
+                                        <li>暂无新增商品数据</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 灵犀互娱 市场中心 | 数据更新于：2026-04-08</p>
+        </div>
+    </div>
+
+    <script>
+        function showDate(date) {
+            // 隐藏所有内容
+            document.querySelectorAll('.date-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.date-tab').forEach(el => el.classList.remove('active'));
+            
+            // 显示选中内容
+            document.getElementById('date-' + date).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function showCompetitorDate(date) {
+            // 隐藏所有内容
+            document.querySelectorAll('.competitor-date-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.date-tab').forEach(el => el.classList.remove('active'));
+            
+            // 显示选中内容
+            document.getElementById('competitor-date-' + date).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

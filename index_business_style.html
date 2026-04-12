@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀世界 - 市场监控日报（商务简约风示例）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8ecef;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .date {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #1a73e8;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #1a73e8;
+            font-weight: 600;
+        }
+
+        .subsubsection-title {
+            font-size: 1.3em;
+            color: #4a5568;
+            margin: 20px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .summary-box {
+            background: #f8fbff;
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 4px solid #1a73e8;
+            border-top: 1px solid #e3f2fd;
+            border-right: 1px solid #e3f2fd;
+            border-bottom: 1px solid #e3f2fd;
+        }
+
+        .summary-box p {
+            color: #2d3748;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .competitor-card {
+            background: #fafbfc;
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #d1d9e6;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #1a73e8;
+        }
+
+        .competitor-name {
+            font-size: 1.4em;
+            color: #1a73e8;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8eaed;
+        }
+
+        .channel-tag {
+            display: inline-block;
+            background: #1a73e8;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .competitor-card ul {
+            margin-left: 0;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        li ul {
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+
+        p {
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .event-item {
+            background: #f8fbff;
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border-left: 4px solid #1a73e8;
+        }
+
+        .event-time {
+            font-weight: 600;
+            color: #1a73e8;
+            margin-right: 10px;
+        }
+
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #1a73e8;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #1a73e8;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1a73e8;
+            margin-bottom: 10px;
+            padding: 8px 15px;
+            background: #f8fbff;
+            border-radius: 4px;
+            display: block;
+            width: fit-content;
+            margin-left: 24px;
+            border: 1px solid #e3f2fd;
+        }
+
+        .timeline-content {
+            background: #fafbfc;
+            border-radius: 6px;
+            padding: 20px;
+            border: 1px solid #d1d9e6;
+            margin-top: 10px;
+            margin-left: 24px;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* 日期切换按钮样式 */
+        .date-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            margin-left: 24px;
+            flex-wrap: wrap;
+        }
+
+        .date-tab {
+            padding: 10px 20px;
+            border: 2px solid #1a73e8;
+            background: white;
+            color: #1a73e8;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .date-tab:hover {
+            background: #f8fbff;
+            transform: translateY(-2px);
+            border-color: #1557b0;
+        }
+
+        .date-tab.active {
+            background: #1a73e8;
+            color: white;
+            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+        }
+
+        .date-content {
+            display: none;
+        }
+
+        .date-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .competitor-card {
+                padding: 20px;
+            }
+
+            .date-tabs {
+                gap: 8px;
+            }
+
+            .date-tab {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+        }
+    
+        /* 独立的日期内容区块 */
+        .competitor-date-content {
+            display: none;
+        }
+        
+        .competitor-date-content.active {
+            display: block;
+        }
+        
+        .user-feedback-date-content {
+            display: none;
+        }
+        
+        .user-feedback-date-content.active {
+            display: block;
+        }
+
+        /* 榜单曲线图样式 */
+        #rank-chart-container {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        #rank-chart-container svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .chart-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .axis-label {
+            font-size: 12px;
+            fill: #718096;
+        }
+        
+        .grid-line {
+            stroke: #e2e8f0;
+            stroke-dasharray: 2,2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 王者荣耀世界 - 市场监控日报</h1>
+            <div class="date">商务简约风格示例</div>
+        </div>
+
+        <div class="content">
+            <!-- 总结板块 -->
+            <div class="section">
+                <h2 class="section-title">📊 今日总结</h2>
+                <div class="summary-box">
+                    <p><strong>官方活动：</strong>4 月 7 日，官网开启 PC 客户端预下载活动，提供 60GB 完整安装包及 15GB 差异包两种选项，支持断点续传。小红书已出现 ID 抢注攻略传播，显示玩家对稀缺资源的早期布局意识。</p>
+                    <p style="margin-top: 10px;"><strong>竞品动态：</strong>螃蟹账号平台《王者荣耀世界》相关商品以账号交易为主（占比 68%），价格区间集中在 50-500 元；盼之代售以代肝服务为主要品类（占比 45%），单价 20-200 元；闲鱼则呈现多元化交易生态，虚拟道具、代肝、社交助力三类合计占 72%。</p>
+                    <p style="margin-top: 10px;"><strong>用户需求：</strong>微博舆情中"游戏攻略"类诉求占比最高（32%），其次为"社交互动"（24%）和"代练代肝"（18%）。小红书用户重点关注 ID 抢注策略、公测时间预测及首抽角色推荐。</p>
+                </div>
+            </div>
+
+            <!-- 榜单曲线图板块 -->
+            <div class="section">
+                <h2 class="section-title">📈 云·王者荣耀世界榜单趋势</h2>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #FF6B6B;"></div>
+                        <span>免费榜排名</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #4ECDC4;"></div>
+                        <span>畅销榜排名</span>
+                    </div>
+                </div>
+                <div id="rank-chart-container">
+                    <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 背景 -->
+                        <rect width="800" height="350" fill="#fafbfc"/>
+                        
+                        <!-- 网格线 -->
+                        <line x1="60" y1="50" x2="780" y2="50" class="grid-line"/>
+                        <line x1="60" y1="100" x2="780" y2="100" class="grid-line"/>
+                        <line x1="60" y1="150" x2="780" y2="150" class="grid-line"/>
+                        <line x1="60" y1="200" x2="780" y2="200" class="grid-line"/>
+                        <line x1="60" y1="250" x2="780" y2="250" class="grid-line"/>
+                        <line x1="60" y1="300" x2="780" y2="300" class="grid-line"/>
+                        
+                        <!-- Y 轴标签 -->
+                        <text x="55" y="55" class="axis-label" text-anchor="end">1</text>
+                        <text x="55" y="105" class="axis-label" text-anchor="end">50</text>
+                        <text x="55" y="155" class="axis-label" text-anchor="end">100</text>
+                        <text x="55" y="205" class="axis-label" text-anchor="end">150</text>
+                        <text x="55" y="255" class="axis-label" text-anchor="end">200</text>
+                        
+                        <!-- X 轴标签 -->
+                        <text x="120" y="320" class="axis-label" text-anchor="middle">03-24</text>
+                        <text x="240" y="320" class="axis-label" text-anchor="middle">03-25</text>
+                        <text x="360" y="320" class="axis-label" text-anchor="middle">03-26</text>
+                        <text x="480" y="320" class="axis-label" text-anchor="middle">03-27</text>
+                        <text x="600" y="320" class="axis-label" text-anchor="middle">03-28</text>
+                        <text x="720" y="320" class="axis-label" text-anchor="middle">03-29</text>
+                        
+                        <!-- 免费榜曲线（红色） -->
+                        <polyline points="120,280 240,260 360,220 480,180 600,140 720,100" 
+                                  fill="none" stroke="#FF6B6B" stroke-width="3"/>
+                        
+                        <!-- 畅销榜曲线（青色） -->
+                        <polyline points="120,300 240,290 360,270 480,240 600,200 720,160" 
+                                  fill="none" stroke="#4ECDC4" stroke-width="3"/>
+                        
+                        <!-- 数据点 -->
+                        <circle cx="120" cy="280" r="5" fill="#FF6B6B"/>
+                        <circle cx="240" cy="260" r="5" fill="#FF6B6B"/>
+                        <circle cx="360" cy="220" r="5" fill="#FF6B6B"/>
+                        <circle cx="480" cy="180" r="5" fill="#FF6B6B"/>
+                        <circle cx="600" cy="140" r="5" fill="#FF6B6B"/>
+                        <circle cx="720" cy="100" r="5" fill="#FF6B6B"/>
+                        
+                        <circle cx="120" cy="300" r="5" fill="#4ECDC4"/>
+                        <circle cx="240" cy="290" r="5" fill="#4ECDC4"/>
+                        <circle cx="360" cy="270" r="5" fill="#4ECDC4"/>
+                        <circle cx="480" cy="240" r="5" fill="#4ECDC4"/>
+                        <circle cx="600" cy="200" r="5" fill="#4ECDC4"/>
+                        <circle cx="720" cy="160" r="5" fill="#4ECDC4"/>
+                    </svg>
+                    <div class="chart-tooltip"></div>
+                </div>
+            </div>
+
+            <!-- 竞品动态追踪板块 -->
+            <div class="section">
+                <h2 class="section-title">🏪 竞品动态追踪</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">4 月 7 日</div>
+                        <div class="timeline-content">
+                            <!-- 螃蟹 -->
+                            <div class="competitor-card">
+                                <div class="competitor-name">竞品：螃蟹</div>
+                                <div class="channel-tag">账号交易</div>
+                                <ul>
+                                    <li><strong>商品类型分布：</strong>账号（68%）、代练（15%）、充值（10%）、其他（7%）</li>
+                                    <li><strong>价格区间：</strong>50-500 元（主力区间），高端账号可达 2000-5000 元</li>
+                                    <li><strong>命名特征：</strong>突出"首测资格"、"稀有 ID"、"满级"等关键词</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- 盼之 -->
+                            <div class="competitor-card">
+                                <div class="competitor-name">竞品：盼之</div>
+                                <div class="channel-tag">代肝服务</div>
+                                <ul>
+                                    <li><strong>商品类型分布：</strong>代肝（45%）、成品号（30%）、昵称（15%）、其他（10%）</li>
+                                    <li><strong>价格区间：</strong>20-200 元（代肝服务），500-3000 元（成品号）</li>
+                                    <li><strong>命名特征：</strong>强调"纯手工"、"效率"、"安全"等服务保障</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- 闲鱼 -->
+                            <div class="competitor-card">
+                                <div class="competitor-name">竞品：闲鱼</div>
+                                <div class="channel-tag">综合交易</div>
+                                <ul>
+                                    <li><strong>商品类型分布：</strong>虚拟道具（28%）、代肝（24%）、社交助力（20%）、账号（15%）、其他（13%）</li>
+                                    <li><strong>价格区间：</strong>5-50 元（虚拟道具/助力），50-300 元（代肝），200-2000 元（账号）</li>
+                                    <li><strong>命名特征：</strong>多样化，包含"急出"、"退坑"、"内测资格"等场景化描述</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用户需求追踪板块 -->
+            <div class="section">
+                <h2 class="section-title">💬 用户需求追踪</h2>
+                
+                <div class="date-tabs">
+                    <div class="date-tab active">4 月 7 日</div>
+                    <div class="date-tab">4 月 6 日</div>
+                    <div class="date-tab">4 月 5 日</div>
+                </div>
+                
+                <div class="date-content active">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <p><strong>微博舆情分类占比：</strong></p>
+                                <ul>
+                                    <li>游戏攻略：32%</li>
+                                    <li>社交互动：24%</li>
+                                    <li>代练代肝：18%</li>
+                                    <li>道具交易：12%</li>
+                                    <li>游戏内容：8%</li>
+                                    <li>其他：6%</li>
+                                </ul>
+                                <p style="margin-top: 15px;"><strong>小红书热点话题：</strong></p>
+                                <ul>
+                                    <li>ID 抢注攻略：如何获取稀有短 ID 及数字 ID</li>
+                                    <li>公测时间预测：基于测试进度的推测分析</li>
+                                    <li>首抽角色推荐：T0 梯队角色强度排行</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Generated by Wukong | 最后更新：2026 年 4 月 8 日</p>
+        </div>
+    </div>
+
+    <script>
+        // 日期切换功能
+        document.querySelectorAll('.date-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabs = this.parentElement.querySelectorAll('.date-tab');
+                const contents = this.closest('.section').querySelectorAll('.date-content');
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                const index = Array.from(tabs).indexOf(this);
+                contents[index].classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
