@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《王者荣耀：世界》市场AI监控汇总</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 010px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header .date {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .summary-card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .summary-content {
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .event-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .event-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .event-time {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .event-title {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .event-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .competitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .competitor-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .competitor-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .competitor-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .tag-hot {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .tag-new {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .tag-trending {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .user-demand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .demand-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-top: 4px solid #667eea;
+        }
+        
+        .demand-channel {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .demand-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .competitor-table {
+                font-size: 14px;
+            }
+            
+            .competitor-table th,
+            .competitor-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+        <!-- Header -->
+       <div class="header">
+            <h1>🎮 《王者荣耀：世界》市场AI监控汇总</h1>
+            <div class="date">📅 数据日期：<span id="report-date">2026年03月31日</span></div>
+        </div>
+        
+        <!-- Summary -->
+       <div class="summary-card">
+            <h2>💡 核心总结</h2>
+           <div class="summary-content">
+                
+    <p><strong>1. ID交易市场持续火热：</strong>闲鱼平台单字/二字极品昵称价格突破¥50,000，螃蟹平台跟进推出游戏品类，涵盖热门ID、双字/单字ID及角色ID，价格区间¥350-¥300,000。</p>
+    <p><strong>2. 用户需求痛点明确：</strong>昵称唯一性引发激烈竞争，用户反馈抢注困难，偏好2-4字文学/诗意类ID，代肝服务需求占比25%。</p>
+    <p><strong>3. 官方活动节点密集：</strong>近期开启多轮测试，社交媒体声量持续攀升，微博超话日均讨论量突破10万+。</p>
+    
+            </div>
+        </div>
+        
+        <!-- Official Events -->
+        <div class="section">
+           <h2 class="section-title">📢 游戏官方事件/活动</h2>
+            <div id="official-events">
+                
+       <div class="event-item">
+            <div class="event-time">🕐 2026-03-31 10:04</div>
+           <div class="event-title">新一轮技术测试开启</div>
+            <div class="event-desc">官方宣布开启第三轮技术测试，新增PVP玩法和社交系统优化，测试名额50,000人。</div>
+        </div>
+        
+            </div>
+        </div>
+        
+        <!-- Competitor Tracking -->
+       <div class="section">
+           <h2 class="section-title">🔍 竞品动态追踪</h2>
+            <table class="competitor-table">
+                <thead>
+                   <tr>
+                        <th>平台</th>
+                       <th>商品类型</th>
+                       <th>价格区间</th>
+                        <th>热度标签</th>
+                    </tr>
+                </thead>
+                <tbody id="competitor-data">
+                    
+        <tr>
+            <td><strong>螃蟹账号</strong></td>
+            <td>单字ID/双字ID/角色ID</td>
+            <td>¥350-¥300,000</td>
+            <td><span class="tag tag-hot">🔥 热门</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>盼之代售</strong></td>
+            <td>高等级账号/稀有宠物</td>
+            <td>¥2,000-¥50,000</td>
+            <td><span class="tag tag-trending">📈 上升</span></td>
+        </tr>
+        
+        <tr>
+            <td><strong>闲鱼</strong></td>
+            <td>虚拟道具/兑换码/代肝</td>
+            <td>¥10-¥5,000</td>
+            <td><span class="tag tag-new">✨ 新品</span></td>
+        </tr>
+        
+               </tbody>
+            </table>
+        </div>
+        
+       <!-- User Demands -->
+        <div class="section">
+           <h2 class="section-title">👥 用户需求追踪</h2>
+            <div class="user-demand-grid" id="user-demands">
+                
+        <div class="demand-card">
+            <div class="demand-channel">📱 微博超话</div>
+            <div class="demand-content">代肝服务需求占比25%，主要集中在等级提升和任务完成；社交组队需求17.5%，用户寻求固定队友。</div>
+        </div>
+        
+        <div class="demand-card">
+            <div class="demand-channel">📱 小红书</div>
+            <div class="demand-content">ID抢注成为核心痛点，用户分享抢注技巧和心仪ID清单；玩法创新讨论热度高，期待多端互通体验。</div>
+        </div>
+        
+        <div class="demand-card">
+            <div class="demand-channel">📱 闲鱼</div>
+            <div class="demand-content">低单价虚拟物品交易活跃，称号/奖牌、邀请助力、战令宠物等品类成交率高，反映用户对早期优势的重视。</div>
+        </div>
+        
+           </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>自动生成于 2026-03-31 10:04:53 | 灵犀互娱-市场中心-用研组</p>
+        </div>
+    </div>
+</body>
+</html>

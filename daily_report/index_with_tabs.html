@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀世界 - 市场监控日报（带日期切换）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .date {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-weight: 600;
+        }
+
+        .subsubsection-title {
+            font-size: 1.3em;
+            color: #4a5568;
+            margin: 20px 0 15px 0;
+            font-weight: 600;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+
+        .summary-box p {
+            color: #2d3748;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .competitor-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .competitor-name {
+            font-size: 1.4em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .channel-tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        li ul {
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+
+        p {
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .event-item {
+            background: #f0f9ff;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .event-time {
+            font-weight: 600;
+            color: #667eea;
+            margin-right: 10px;
+        }
+
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #667eea;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            margin-top: 10px;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #718096;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* 日期切换按钮样式 */
+        .date-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .date-tab {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .date-tab:hover {
+            background: #f0f9ff;
+            transform: translateY(-2px);
+        }
+
+        .date-tab.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .date-content {
+            display: none;
+        }
+
+        .date-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .competitor-card {
+                padding: 20px;
+            }
+
+            .date-tabs {
+                gap: 8px;
+            }
+
+            .date-tab {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>王者荣耀世界 - 市场监控日报</h1>
+            <div class="date">4月1日</div>
+        </div>
+
+        <div class="content">
+            <!-- 总结部分 -->
+            <div class="section">
+                <h2 class="section-title">总结</h2>
+                <div class="summary-box">
+                    <p>3月30日，《王者荣耀世界》开启云游戏抢先体验及昵称抢注活动。竞品方面：螃蟹迅速跟进推出涵盖热门、单双字及角色ID的账号交易服务，并提供代练业务；盼之在品类布局上并未跟进，但在推广上通过KOL"长安司剑"布局视频内容；闲鱼市场则呈现ID交易单一品类垄断态势。用户侧，昵称抢注困难成为核心痛点，单字ID极度稀缺。</p>
+                </div>
+            </div>
+
+            <!-- 游戏官方事件/活动 -->
+            <div class="section">
+                <h2 class="section-title">1、游戏官方事件/活动</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">3月30日</div>
+                        <div class="timeline-content">
+                            <p style="margin: 0; color: #4a5568;">《云·王者荣耀世界》抢先体验版精彩活动；正式开启！快来抢注你的《王者荣耀世界》昵称</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 竞品动态追踪（带日期切换） -->
+            <div class="section">
+                <h2 class="section-title">2、竞品动态追踪</h2>
+                
+                <!-- 日期切换按钮 -->
+                <div class="date-tabs">
+                    <button class="date-tab active" onclick="showDate('04-02')">4月2日</button>
+                    <button class="date-tab" onclick="showDate('04-01')">4月1日</button>
+                    <button class="date-tab" onclick="showDate('03-31')">3月31日</button>
+                    <button class="date-tab" onclick="showDate('03-30')">3月30日</button>
+                </div>
+
+                <!-- 4月2日内容 -->
+                <div id="date-04-02" class="date-content active">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">4月2日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品一：螃蟹</div>
+                                    <h3 class="subsubsection-title">螃蟹账号《王者荣耀世界》商品数据分析报告</h3>
+                                    <p><strong>数据总量:</strong> 100 个商品</p>
+                                    <p><strong>分析时间:</strong> 04-02</p>
+                                    
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格分布分析</h4>
+                                    <ul>
+                                        <li>价格范围: ¥60 - ¥18,888</li>
+                                        <li>中位数价格: ¥677</li>
+                                        <li>高价商品(≥¥10,000): 4 个 (4.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格区间分布</h4>
+                                    <ul>
+                                        <li>0-500: 36 个 (36.0%)</li>
+                                        <li>500-1000: 35 个 (35.0%)</li>
+                                        <li>1000-5000: 21 个 (21.0%)</li>
+                                        <li>5000-10000: 4 个 (4.0%)</li>
+                                        <li>10000-50000: 4 个 (4.0%)</li>
+                                        <li>50000+: 0 个 (0.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">平台分布</h4>
+                                    <ul>
+                                        <li>QQ: 78 个 (78.0%)</li>
+                                        <li>微信: 22 个 (22.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">命名特征</h4>
+                                    <ul>
+                                        <li>双字ID: 60 个 (60.0%)</li>
+                                        <li>热门ID: 19 个 (19.0%)</li>
+                                        <li>单字ID: 16 个 (16.0%)</li>
+                                        <li>情侣ID: 2 个 (2.0%)</li>
+                                        <li>英文ID: 2 个 (2.0%)</li>
+                                        <li>数字ID: 1 个 (1.0%)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品二：盼之</div>
+                                    <p style="color: #718096; font-style: italic;">暂无新动态</p>
+                                </div>
+
+                                <div class="competitor-card">
+                                    <div class="competitor-name">竞品三：闲鱼</div>
+                                    <p style="color: #718096; font-style: italic;">暂无新动态</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4月1日内容 -->
+                <div id="date-04-01" class="date-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">4月1日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品一：螃蟹</div>
+                                    <h3 class="subsubsection-title">螃蟹账号《王者荣耀世界》商品数据分析报告</h3>
+                                    <p><strong>数据总量:</strong> 100 个商品</p>
+                                    <p><strong>分析时间:</strong> 04-01</p>
+                                    
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格分布分析</h4>
+                                    <ul>
+                                        <li>价格范围: ¥80 - ¥999,999</li>
+                                        <li>平均价格: ¥21,779</li>
+                                        <li>中位数价格: ¥1,500</li>
+                                        <li>高价商品(≥¥10,000): 16 个 (16.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格区间分布</h4>
+                                    <ul>
+                                        <li>0-500: 27 个 (27.0%)</li>
+                                        <li>500-1000: 20 个 (20.0%)</li>
+                                        <li>1000-5000: 29 个 (29.0%)</li>
+                                        <li>5000-10000: 9 个 (9.0%)</li>
+                                        <li>10000-50000: 4 个 (4.0%)</li>
+                                        <li>50000+: 11 个 (11.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">平台分布</h4>
+                                    <ul>
+                                        <li>QQ: 86 个 (86.0%)</li>
+                                        <li>微信: 14 个 (14.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">命名特征</h4>
+                                    <ul>
+                                        <li>单字ID: 17 个 (17.0%)</li>
+                                        <li>双字ID: 28 个 (28.0%)</li>
+                                        <li>主要风格: 诗意/文学类 (12%)、霸气/中二类 (8%)、可爱/萌系 (7%)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品二：盼之</div>
+                                    <h3 class="subsubsection-title">盼之网站前100个商品分析报告</h3>
+                                    
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">商品类型分析</h4>
+                                    <p>商品类型多样化，主要包括以下类型商品：</p>
+                                    <ul>
+                                        <li>双字ID: 22 个 (22.0%) - 如"玉佩"、"推辞"、"好宅"等</li>
+                                        <li>特殊含义ID: 21 个 (21.0%) - 包含"极品"、"绝版"、"正版"等特殊标签的ID</li>
+                                        <li>单字ID: 20 个 (20.0%) - 如"胆"、"衿"、"瞻"等稀有单字</li>
+                                        <li>普通ID: 19 个 (19.0%) - 常规游戏账号和ID</li>
+                                        <li>明星名人ID: 8 个 (8.0%) - 如"杨颖baby"、"吴彦祖"、"刘亦菲"、"张艺兴"等</li>
+                                        <li>三字及以上ID: 5 个 (5.0%) - 如"自习室"、"听细雨绵绵"等</li>
+                                        <li>情侣/闺蜜ID: 3 个 (3.0%) - 可搭配使用的情侣或闺蜜ID组合</li>
+                                        <li>招商/返利账号: 2 个 (2.0%) - 高价值的招商和返利专用账号</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格分布分析</h4>
+                                    <ul>
+                                        <li>价格范围: ¥69 - ¥9,999,999</li>
+                                        <li>平均价格: ¥121,260</li>
+                                        <li>中位数价格: ¥888</li>
+                                        <li>高价商品(≥¥10,000): 16 个 (16.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格区间分布</h4>
+                                    <ul>
+                                        <li>0-500: 36 个 (36.0%)</li>
+                                        <li>500-1000: 29 个 (29.0%)</li>
+                                        <li>1000-5000: 17 个 (17.0%)</li>
+                                        <li>5000-10000: 2 个 (2.0%)</li>
+                                        <li>10000-50000: 9 个 (9.0%)</li>
+                                        <li>50000+: 7 个 (7.0%)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="competitor-card">
+                                    <div class="competitor-name">竞品三：闲鱼</div>
+                                    <p style="color: #718096; font-style: italic;">暂无新动态</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3月31日内容 -->
+                <div id="date-03-31" class="date-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">3月31日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品一：螃蟹</div>
+                                    <h3 class="subsubsection-title">螃蟹账号《王者荣耀世界》商品数据分析报告</h3>
+                                    <p><strong>数据总量:</strong> 100 个商品</p>
+                                    <p><strong>分析时间:</strong> 03-31</p>
+                                    
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格分布分析</h4>
+                                    <ul>
+                                        <li>价格范围: ¥80 - ¥999,999</li>
+                                        <li>平均价格: ¥21,779</li>
+                                        <li>中位数价格: ¥1,500</li>
+                                        <li>高价商品(≥¥10,000): 16 个 (16.0%)</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">价格区间分布</h4>
+                                    <ul>
+                                        <li>0-500: 27 个 (27.0%)</li>
+                                        <li>500-1000: 20 个 (20.0%)</li>
+                                        <li>1000-5000: 29 个 (29.0%)</li>
+                                        <li>5000-10000: 9 个 (9.0%)</li>
+                                        <li>10000-50000: 4 个 (4.0%)</li>
+                                        <li>50000+: 11 个 (11.0%)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品二：盼之</div>
+                                    <p style="color: #718096; font-style: italic;">暂无新动态</p>
+                                </div>
+
+                                <div class="competitor-card">
+                                    <div class="competitor-name">竞品三：闲鱼</div>
+                                    <h3 class="subsubsection-title">核心发现</h3>
+                                    <ul>
+                                        <li><strong>代练与成就解锁需求旺盛：</strong>大量商品聚焦于"红buff挑战""狂暴模式通关""限定S级称号获取"等代打服务，价格普遍在1-5元之间，强调"扫码秒上""纯手打"，反映玩家对快速达成高难度成就的高度关注。</li>
+                                        <li><strong>ID交易成为重要细分市场：</strong>平台存在大量游戏ID买卖信息，包括"双字/三字极品ID""Q区/V区专属ID""带昵称账号"，价格从1元到数百元不等（如标价350元的"无人爱"ID），部分卖家提供"开服秒改""三无小号换绑"等服务。</li>
+                                        <li><strong>虚拟道具与资源代充普及：</strong>涵盖多款游戏的代充业务广泛存在，并出现针对特定区域（如俄服、台服）的定制化服务，体现跨区域游戏消费的需求增长。</li>
+                                        <li><strong>辅助工具与修改服务隐现灰色地带：</strong>部分商品涉及"全自动挂机脚本""科技代过""解绑换绑腾卡"等内容，暗示存在绕过官方机制的技术手段，需警惕潜在封号风险。</li>
+                                        <li><strong>低价引流策略普遍：</strong>多数服务定价偏低（集中于1-10元区间），结合"限时优惠""买赠活动"等标签吸引流量，反映市场竞争激烈，卖家依赖薄利多销维持销量。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3月30日内容 -->
+                <div id="date-03-30" class="date-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">3月30日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品一：螃蟹</div>
+                                    
+                                    <h3 class="subsubsection-title">产品布局</h3>
+                                    
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">账号交易</h4>
+                                    <ul>
+                                        <li><strong>账号类型：</strong>
+                                            <ul>
+                                                <li>热门ID账号（示例：木婉清、梦泪、蓝眼泪）</li>
+                                                <li>双字ID账号（示例：乾龍、流脉、控制、回避、愚季、诡枪）</li>
+                                                <li>单字ID账号（示例：瑛、单字非生僻）</li>
+                                                <li>角色ID账号（示例：二字貂蝉相关）</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>价格范围：</strong>¥350 – ¥300,000</li>
+                                        <li><strong>账号属性：</strong>支持未实名、可换绑手机号、具备隐藏防封功能</li>
+                                    </ul>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">代练服务</h4>
+                                    <p>提供"王者荣耀世界"全能代练服务，涵盖：任意等级提升、剧情任务推进、托管维护、材料收集、跑图协助、排位上分、陪玩教学及其他定制化业务</p>
+
+                                    <h3 class="subsubsection-title">营销布局</h3>
+                                    <p>尚未开展具体营销动作</p>
+                                </div>
+
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <div class="competitor-name">竞品二：盼之</div>
+                                    
+                                    <h3 class="subsubsection-title">产品布局</h3>
+                                    <p>暂无相关产品上线或服务推出</p>
+
+                                    <h3 class="subsubsection-title">营销布局</h3>
+                                    <p>启动视频内容布局，合作KOL：长安司剑。通过系列视频内容有效拉升传播效能，关键事件如下：</p>
+
+                                    <h4 style="color: #5a67d8; margin: 15px 0 10px 0;">关键内容事件回顾</h4>
+                                    <div style="background: white; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                                        <p style="margin-bottom: 10px;"><strong>游戏内购争议（3月10日）：</strong>发布视频《什么皮肤敢卖2400？》，深度解析商城皮肤定价，获得2609次互动，成为周期内最热爆点。</p>
+                                        <p style="margin-bottom: 10px;"><strong>跨游戏话题联动（3月20日）：</strong>将《王者荣耀世界》与《洛克王国世界》等游戏进行对比讨论，获得191次互动，表明该游戏已被纳入更广泛的游戏生态中被审视。</p>
+                                        <p style="margin-bottom: 0;"><strong>新英雄内容发布（3月23日）：</strong>发布游戏首个英雄PV及"伽罗"角色介绍，获得171次互动，显示玩家对新角色与玩法内容保持关注。</p>
+                                    </div>
+                                </div>
+
+                                <div class="competitor-card">
+                                    <div class="competitor-name">竞品三：闲鱼</div>
+                                    <h3 class="subsubsection-title">产品布局</h3>
+                                    <ul>
+                                        <li>所有商品集中于游戏ID/昵称类虚拟身份交易</li>
+                                        <li>主要交易品类包括：单字ID、二字ID、极品昵称、稀有名字</li>
+                                        <li>市场呈现ID交易单一品类垄断态势</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用户需求追踪（带日期切换） -->
+            <div class="section" id="user-feedback-section">
+                <h2 class="section-title">3、用户需求追踪</h2>
+                
+                <!-- 日期切换按钮 -->
+                <div class="date-tabs">
+                    <button class="date-tab active" onclick="showUserFeedbackDate('03-31')">3月31日</button>
+                    <button class="date-tab" onclick="showUserFeedbackDate('03-30')">3月30日</button>
+                </div>
+
+                <!-- 3月31日内容 -->
+                <div id="user-feedback-03-31" class="date-content active">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">3月31日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <span class="channel-tag">渠道：小红书</span>
+                                    <ul>
+                                        <li>昵称抢注攻略和教程成为热门内容</li>
+                                        <li>用户积极分享自己成功抢到的 ID</li>
+                                        <li>极品 ID(单字、二字、诗意名)稀缺性引发热烈讨论</li>
+                                        <li>3 月 30 日 10 点抢注活动参与反馈集中爆发</li>
+                                        <li>PC 端公测定档 4 月 10 日的信息广泛传播</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3月30日内容 -->
+                <div id="user-feedback-03-30" class="date-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">3月30日</div>
+                            <div class="timeline-content">
+                                <div class="competitor-card" style="margin-bottom: 20px;">
+                                    <span class="channel-tag">渠道：小红书</span>
+                                    <ul>
+                                        <li>ID 抢注成为热点话题</li>
+                                        <li>昵称唯一性机制引发用户间激烈竞争</li>
+                                        <li>用户普遍反馈注册困难，如"努力半天一个词组都没有"</li>
+                                        <li>单字 ID 极度稀缺</li>
+                                        <li>常见成功注册 ID 多为 2–4 字文学性、诗意类名称，例如："敬山水""月神""惊鸿舞"</li>
+                                    </ul>
+                                </div>
+
+                                <div class="competitor-card">
+                                    <span class="channel-tag">渠道：微博</span>
+                                    <p>用户主要行为集中在：晒出已抢到的游戏 ID、讨论 ID 抢注难度、表达对稀有 ID 获取难的情绪反馈</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 市场监控报告 | 数据更新时间：4月2日</p>
+        </div>
+    </div>
+
+    <script>
+        // 竞品动态追踪日期切换
+        function showDate(dateId) {
+            // 隐藏所有竞品动态内容
+            const contents = document.querySelectorAll('.section:nth-of-type(2) .date-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // 移除竞品动态所有按钮的激活状态
+            const tabs = document.querySelectorAll('.section:nth-of-type(2) .date-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 显示选中的竞品动态内容
+            const selectedContent = document.getElementById('date-' + dateId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            // 激活对应的按钮
+            event.target.classList.add('active');
+        }
+
+        // 用户需求追踪日期切换
+        function showUserFeedbackDate(dateId) {
+            // 隐藏所有用户需求内容
+            const contents = document.querySelectorAll('#user-feedback-section .date-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // 移除用户需求所有按钮的激活状态
+            const tabs = document.querySelectorAll('#user-feedback-section .date-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 显示选中的用户需求内容
+            const selectedContent = document.getElementById('user-feedback-' + dateId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            // 激活对应的按钮
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

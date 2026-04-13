@@ -1,0 +1,27 @@
+{
+  "date": "2026 年 4 月 7 日",
+  "total": 98,
+  "median_price": 7502,
+  "platforms": {
+    "QQ": 85,
+    "微信": 13
+  },
+  "qq_count": 85,
+  "single_char_ids": 13,
+  "double_char_ids": 42,
+  "single_char_count": 13,
+  "double_char_count": 42,
+  "categories": [
+    "账号",
+    "代练",
+    "充值"
+  ],
+  "price_ranges": {
+    "0-500": 6,
+    "500-1000": 9,
+    "1000-5000": 26,
+    "5000-10000": 18,
+    "10000-50000": 15,
+    "50000+": 24
+  }
+}

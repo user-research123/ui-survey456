@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>《王者荣耀：世界》市场AI监控汇总</title>
+   <style>
+        * {
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #f5f7fa0%, #c3cfe2100%);
+            padding:20px;
+            line-height:1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width:1200px;
+            margin:0 auto;
+            background: white;
+            border-radius:12px;
+            box-shadow:04px20px rgba(0,0,0,0.1);
+            padding:40px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size:32px;
+            margin-bottom:30px;
+            padding-bottom:20px;
+            border-bottom:3px solid #667eea;
+        }
+        
+        h2 {
+            color: #34495e;
+            font-size:24px;
+            margin:30px020px0;
+            padding-left:15px;
+            border-left:4px solid #667eea;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #667eea0%, #764ba2100%);
+            color: white;
+            padding:25px;
+            border-radius:8px;
+            margin-bottom:30px;
+        }
+        
+        .summary h3 {
+            font-size:20px;
+            margin-bottom:15px;
+        }
+        
+        .summary p {
+            font-size:15px;
+            line-height:1.8;
+        }
+        
+        .highlight {
+            color: #ffeb3b;
+            font-weight: bold;
+        }
+        
+        .date-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding:5px15px;
+            border-radius:20px;
+            font-size:14px;
+            margin-bottom:15px;
+        }
+        
+        table {
+            width:100%;
+            border-collapse: collapse;
+            margin:20px0;
+            background: white;
+            border-radius:8px;
+            overflow: hidden;
+            box-shadow:02px8px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea0%, #764ba2100%);
+            color: white;
+            padding:15px;
+            text-align: left;
+            font-weight:600;
+        }
+        
+        td {
+            padding:15px;
+            border-bottom:1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .competitor-row {
+            border-left: 4px solid #667eea;
+        }
+        
+        .competitor-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding:3px10px;
+            border-radius:12px;
+            font-size:12px;
+            margin:2px;
+        }
+        
+        .tag-hot {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .tag-new {
+            background: #4ecdc4;
+            color: white;
+        }
+        
+        .tag-rise {
+            background: #ffd93d;
+            color: #333;
+        }
+        
+        .link {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .link:hover {
+            text-decoration: underline;
+        }
+        
+        .image-placeholder {
+            background: #f0f0f0;
+            border:2px dashed #ccc;
+            padding:40px;
+            text-align: center;
+            color: #999;
+            border-radius:8px;
+            margin:15px0;
+        }
+        
+        .content-block {
+            background: #f8f9fa;
+            padding:20px;
+            border-radius:8px;
+            margin:15px0;
+        }
+        
+        .content-block ul {
+            margin-left:20px;
+            margin-top:10px;
+        }
+        
+        .content-block li {
+            margin:8px0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top:40px;
+            padding-top:20px;
+            border-top:2px solid #e0e0e0;
+            color: #666;
+            font-size:14px;
+        }
+        
+        .qr-code {
+            text-align: center;
+            margin-top:30px;
+        }
+        
+        .qr-placeholder {
+            display: inline-block;
+            width:120px;
+            height:120px;
+            background: #f0f0f0;
+            border:2px solid #ccc;
+            border-radius:8px;
+            line-height:120px;
+            color: #999;
+            font-size:12px;
+        }
+   </style>
+</head>
+<body>
+   <div class="container">
+       <h1>《王者荣耀：世界》市场AI监控汇总</h1>
+        
+       <!-- 总结部分 -->
+       <div class="summary">
+           <h3>总结：</h3>
+           <p>
+               <span class="date-badge">📅2026年03月30日</span>
+                《王者荣耀世界》于3月30日<span class="highlight">开放昵称抢注</span>及云游戏体验，引发<span class="highlight">用户对ID稀缺性的强烈关注</span>与竞争，小红书及微博平台均反馈单字ID极难获取。竞品方面，<span class="highlight">螃蟹</span>迅速跟进推出涵盖热门、单双字及角色ID的账号交易服务，并提供代练业务；<span class="highlight">盼之</span>在品类布局上并未跟进，但在推广上通过KOL"长安司剑"布局视频内容；<span class="highlight">闲鱼</span>市场则呈现ID交易单一品类垄断态势。
+           </p>
+       </div>
+        
+       <!-- 1、游戏官方事件/活动 -->
+       <h2>1、游戏官方事件/活动</h2>
+        
+       <table>
+           <thead>
+               <tr>
+                   <th style="width: 150px;">日期</th>
+                   <th>事件</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td><span class="date-badge">📅2026年03月30日</span></td>
+                   <td>
+                       <strong>1）10:00正式开放昵称抢注；2）云游戏版本开放限时体验</strong>
+                       <div class="image-placeholder">
+                            [图片：王者荣耀世界邀你抢注角色昵称]<br>
+                           <small>图片展示游戏角色宣传图，包含"王者荣耀世界邀你抢注角色昵称"文字</small>
+                       </div>
+                   </td>
+               </tr>
+               <tr>
+                   <td><span class="date-badge">📅2026年03月31日</span></td>
+                   <td>（暂无新事件）</td>
+               </tr>
+           </tbody>
+       </table>
+        
+       <p style="margin-top: 15px; color: #666; font-size: 14px;">
+           <strong>信息来源：</strong>游戏官网：<a href="https://world.qq.com/web202603/index.html" class="link" target="_blank">https://world.qq.com/web202603/index.html</a>
+       </p>
+        
+       <!-- 2、竞品动态追踪 -->
+       <h2>2、竞品动态追踪</h2>
+        
+       <p><span class="date-badge">📅2026年03月30日</span></p>
+        
+       <table>
+           <thead>
+               <tr>
+                   <th style="width: 100px;">竞品</th>
+                   <th style="width: 80px;">方向</th>
+                   <th style="width: 100px;">类型</th>
+                   <th>详细内容</th>
+               </tr>
+           </thead>
+           <tbody>
+               <!-- 螃蟹 -->
+               <tr class="competitor-row">
+                   <td rowspan="3"><span class="competitor-name">螃蟹</span></td>
+                   <td rowspan="2">产品</td>
+                   <td>账号交易</td>
+                   <td>
+                       <strong>1）账号类型：</strong><br>
+                        •热门ID账号（如"木婉清"、"梦泪"、"蓝眼泪"等）<br>
+                        •双字ID账号（如"乾龍"、"流脉"、"控制"、"回避"、"愚季"、"诡枪"等）<br>
+                        •单字ID账号（如"瑛"、"单字非生僻"等）<br>
+                        •角色ID账号（如"二字貂蝉相关"）<br><br>
+                        
+                       <strong>2）价格范围：</strong>从几百元到几万元不等（¥350 - ¥300,000）<br><br>
+                        
+                       <strong>3）账号属性：</strong>包括未实名、可换绑手机号、隐藏防封等特性
+                   </td>
+               </tr>
+               <tr class="competitor-row">
+                   <td>代练</td>
+                   <td>
+                       王者荣耀世界全能代练任意等级、剧情、任务、托管维护、材料、跑图、排位上分、陪玩教学、其他业务等<br><br>
+                        
+                       <strong>螃蟹信息来源：</strong><br>
+                       <a href="https://www.pxb7.com/buy/149749328781353/1?keyword=&searchType=%E8%87%AA%E7%84%B6%E6%8E%92%E5%BA%8F%9C%E7%B4%A2" class="link" target="_blank">
+                            https://www.pxb7.com/buy/149749328781353/1?keyword=&searchType=%E8%87%AA%E7%84%B6%E6%8E%92%E5%BA%8F%9C%E7%B4%A2
+                       </a>
+                   </td>
+               </tr>
+               <tr class="competitor-row">
+                   <td>营销</td>
+                   <td>视频/公众号上未有推广（通过声量通获取）</td>
+               </tr>
+                
+               <!-- 盼之 -->
+               <tr class="competitor-row">
+                   <td rowspan="2"><span class="competitor-name">盼之</span></td>
+                   <td>产品</td>
+                   <td>未建立品类</td>
+                   <td>（暂无产品信息）</td>
+               </tr>
+               <tr class="competitor-row">
+                   <td>营销</td>
+                   <td>开始做视频布局，KOL：长安司剑</td>
+                   <td>
+                       <div class="image-placeholder">
+                            [图片：长安司剑视频截图]<br>
+                           <small>展示3个视频截图，包含播放量、点赞数等数据</small>
+                       </div>
+                        
+                       <div class="content-block">
+                           <strong>1、游戏内购争议（2026年3月10日）：</strong>由抖音账号"长安司剑"发布的"关于'王者荣耀世界'商城皮肤定价解析的视频，以"什么皮肤敢卖2400？"为标题，获得了<span class="highlight">2609</span>的超高互动量，成为周期内最核心的爆点事件，直接拉高了整体互动效能。<br><br>
+                            
+                           <strong>2、新英雄内容发布（2026年3月23日）：</strong>同样由"长安司剑"发布，内容涉及游戏首个英雄PV及"伽罗"角色介绍，获得171次互动，表明玩家对新游戏角色和玩法内容保持关注。<br><br>
+                            
+                           <strong>3、跨游戏话题联动（2026年3月20日）：</strong>"长安司剑"将"王者荣耀世界"与"洛克王国世界"等游戏进行对比讨论，获得191次互动，体现了该游戏被置于更广泛的游戏产品矩阵中进行观察。<br><br>
+                            
+                           <em>（通过声量通获取）</em>
+                       </div>
+                   </td>
+               </tr>
+                
+               <!-- 闲鱼 -->
+               <tr class="competitor-row">
+                   <td><span class="competitor-name">闲鱼</span></td>
+                   <td></td>
+                   <td>账号交易</td>
+                   <td>
+                       所有商品都在销售游戏ID/昵称类商品。主要交易内容包括单字ID、二字ID、极品昵称、稀有名字等虚拟身份标识<br><br>
+                        
+                       <a href="#" class="link">📎王者荣耀世界闲鱼爬虫</a>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+        
+       <!-- 3、用户需求追踪 -->
+       <h2>3、用户需求追踪</h2>
+        
+       <p><span class="date-badge">📅2026年03月30日</span></p>
+        
+       <table>
+           <thead>
+               <tr>
+                   <th style="width: 120px;">渠道</th>
+                   <th>关注内容</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td><strong>小红书</strong></td>
+                   <td>
+                        ID抢注热度最高：昵称唯一性引发激烈竞争,用户反馈"努力半天一个词组都没有"。常见单字ID极度稀缺,多为2-4字文学/诗意类ID(如"敬山水""月神""惊鸿舞")
+                   </td>
+               </tr>
+               <tr>
+                   <td><strong>微博交易</strong></td>
+                   <td>
+                       微博交易主要在晒自己抢到的ID、说ID难抢等
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+        
+       <!-- 底部二维码 -->
+       <div class="qr-code">
+           <div class="qr-placeholder">
+               钉钉文档<br>二维码
+           </div>
+       </div>
+        
+       <!-- 页脚 -->
+       <div class="footer">
+           <p>自动生成于2026-03-3110:15:32 |灵犀互娱-市场中心-用研组</p>
+       </div>
+   </div>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《王者荣耀：世界》市场AI监控汇总</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 010px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header .date {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .summary-card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .summary-content {
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .event-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .event-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .event-time {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .event-title {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .event-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .competitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .competitor-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .competitor-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .competitor-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .tag-hot {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .tag-new {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .tag-trending {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .user-demand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .demand-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-top: 4px solid #667eea;
+        }
+        
+        .demand-channel {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .demand-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .competitor-table {
+                font-size: 14px;
+            }
+            
+            .competitor-table th,
+            .competitor-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+        <!-- Header -->
+       <div class="header">
+            <h1>🎮 《王者荣耀：世界》市场AI监控汇总</h1>
+            <div class="date">📅 数据日期：<span id="report-date">{{REPORT_DATE}}</span></div>
+        </div>
+        
+        <!-- Summary -->
+       <div class="summary-card">
+            <h2>💡 核心总结</h2>
+           <div class="summary-content">
+                {{SUMMARY_CONTENT}}
+            </div>
+        </div>
+        
+        <!-- Official Events -->
+        <div class="section">
+           <h2 class="section-title">📢 游戏官方事件/活动</h2>
+            <div id="official-events">
+                {{OFFICIAL_EVENTS}}
+            </div>
+        </div>
+        
+        <!-- Competitor Tracking -->
+       <div class="section">
+           <h2 class="section-title">🔍 竞品动态追踪</h2>
+            <table class="competitor-table">
+                <thead>
+                   <tr>
+                        <th>平台</th>
+                       <th>商品类型</th>
+                       <th>价格区间</th>
+                        <th>热度标签</th>
+                    </tr>
+                </thead>
+                <tbody id="competitor-data">
+                    {{COMPETITOR_DATA}}
+               </tbody>
+            </table>
+        </div>
+        
+       <!-- User Demands -->
+        <div class="section">
+           <h2 class="section-title">👥 用户需求追踪</h2>
+            <div class="user-demand-grid" id="user-demands">
+                {{USER_DEMANDS}}
+           </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>自动生成于 {{GENERATE_TIME}} | 灵犀互娱-市场中心-用研组</p>
+        </div>
+    </div>
+</body>
+</html>

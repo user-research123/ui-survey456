@@ -1,0 +1,36 @@
+{
+  "name": "game-rank-chart-generator",
+  "version": "1.0.0",
+  "description": "游戏榜单曲线图生成器 - 基于七麦数据生成符合规范的离线可用SVG曲线图HTML文件",
+  "author": "衡初(冯洁雯)",
+  "tags": ["visualization", "chart", "svg", "game-ranking", "qimai-data"],
+  "triggers": [
+    "生成榜单曲线图",
+    "制作排名趋势图",
+    "游戏榜单可视化",
+    "七麦数据图表",
+    "免费榜曲线",
+    "畅销榜曲线"
+  ],
+  "input_format": {
+    "type": "csv|json",
+    "required_fields": ["time", "rank"],
+    "example": {
+      "csv": "time,game_rank\n2026-03-27 00:00,\n2026-03-28 05:00,95",
+      "json": "[{\"time\": \"2026-03-27 00点00分\", \"game\": \"\"}, {\"time\": \"2026-03-28 05点00分\", \"game\": \"95\"}]"
+    }
+  },
+  "output_format": {
+    "type": "html",
+    "description": "独立HTML文件，包含完整CSS和JavaScript，可直接在浏览器中打开或嵌入到其他HTML报告中"
+  },
+  "dependencies": [],
+  "capabilities": [
+    "数据预处理（过滤空值、格式转换）",
+    "SVG曲线图绘制（纯原生实现）",
+    "响应式适配",
+    "悬停交互tooltip",
+    "Y轴排名正序显示",
+    "X轴月日简化格式"
+  ]
+}

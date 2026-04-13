@@ -1,0 +1,17 @@
+*.swp
+.idea/
+.vscode/
+
+.rewind_shell/
+.sync_node/
+.DS_Store
+.Trash
+__pycache__/
+node_modules/
+.witignore
+.venv
+.wukong
+
+*.key
+*.pem
+.env

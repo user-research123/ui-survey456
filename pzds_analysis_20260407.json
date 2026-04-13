@@ -1,0 +1,25 @@
+{
+  "date": "2026 年 4 月 7 日",
+  "total": 100,
+  "median_price": 829,
+  "categories": [
+    "成品号",
+    "昵称",
+    "代肝"
+  ],
+  "android_qq_count": 72,
+  "apple_qq_count": 21,
+  "android_wechat_count": 4,
+  "apple_wechat_count": 3,
+  "double_char_ids": 41,
+  "single_char_ids": 19,
+  "double_char_count": 41,
+  "single_char_count": 19,
+  "price_ranges": {
+    "0-500": 28,
+    "500-1000": 39,
+    "1000-5000": 17,
+    "5000-10000": 10,
+    "10000 以上": 6
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "date": "2026-04-08",
+  "total_count": 95,
+  "price_range": {
+    "min": 50,
+    "max": 999999,
+    "median": 888
+  },
+  "high_price_count": 6,
+  "price_ranges": {
+    "0-500": 20,
+    "500-1000": 48,
+    "1000-5000": 12,
+    "5000-10000": 9,
+    "10000 以上": 6
+  },
+  "platform_distribution": {
+    "安卓微信": 4,
+    "苹果微信": 2
+  },
+  "id_length_distribution": {
+    "单字 ID": 9,
+    "双字 ID": 36,
+    "三字 ID": 6,
+    "四字及以上 ID": 44
+  },
+  "style_distribution": {
+    "其他": 87,
+    "霸气/中二": 1,
+    "可爱/萌系": 4,
+    "明星/名人": 3
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "date": "2026-04-08",
+  "platform": "闲鱼",
+  "total_items": 30,
+  "analysis": {
+    "price_range": {
+      "min": 1,
+      "max": 1000,
+      "median": 20,
+      "average": 186.5
+    },
+    "categories": {
+      "账号交易": {
+        "count": 12,
+        "percentage": 40,
+        "description": "包含极品 ID、角色账号、PC 端公测账号等"
+      },
+      "代肝服务": {
+        "count": 8,
+        "percentage": 26.7,
+        "description": "包含开荒套餐、等级提升、主线推进等服务"
+      },
+      "虚拟道具": {
+        "count": 5,
+        "percentage": 16.7,
+        "description": "包含游戏海报、辅助工具、国际服下载等"
+      },
+      "ID 交易": {
+        "count": 3,
+        "percentage": 10,
+        "description": "单字 ID、稀有昵称、特殊符号 ID 等"
+      },
+      "其他": {
+        "count": 2,
+        "percentage": 6.6,
+        "description": "包含 ID 估价服务、攻略咨询等"
+      }
+    },
+    "platform_distribution": {
+      "QQ 区": 18,
+      "微信区": 2,
+      "未指定": 10
+    },
+    "naming_features": {
+      "single_char": 3,
+      "double_char": 8,
+      "triple_char": 6,
+      "quad_plus": 13,
+      "special_chars": 2
+    }
+  },
+  "summary": "今日闲鱼平台《王者荣耀世界》商品主要以账号交易 (40%) 和代肝服务 (26.7%) 为主。账号交易中 QQ 区占比最高 (60%),价格区间从¥1-1000 万不等，中位数约¥20。代肝服务主要集中在 PC 端 4 月 10 日开服后的开荒需求，价格从¥18-450 元。ID 交易以单字、双字稀有昵称为主，部分带有特殊符号。整体市场活跃度较高，低价虚拟物品交易频繁。",
+  "raw_data": [
+    {"title": "王者荣耀国际服手游 iOS/安卓 Honor of kings 正 版下载更新", "price": 1, "url": "https://www.goofish.com/item?id=1022408371580"},
+    {"title": "王者荣耀世界全程代肝 4.10 号 PC 端开服", "price": 159, "url": "https://www.goofish.com/item?id=1041258585709"},
+    {"title": "王者荣耀世界极品 ID 无重复，需要联系", "price": 88, "url": "https://www.goofish.com/item?id=1038829561304"},
+    {"title": "王者荣耀世界账号｜东方曜角色｜PC 端公测 4 月 10 号", "price": 1000, "url": "https://www.goofish.com/item?id=1039314057557"},
+    {"title": "王者荣耀世界代肝", "price": 18, "url": "https://www.goofish.com/item?id=1040504370825"},
+    {"title": "王者荣耀世界游戏 10 日开服，辅助开发中", "price": 20, "url": "https://www.goofish.com/item?id=1041470464549"},
+    {"title": "王者荣耀世界 PC 端账号 极品 ID：茅台典藏", "price": 1000, "url": "https://www.goofish.com/item?id=1041401145473"},
+    {"title": "王者荣耀世界账号｜PC 端公测 4 月 10 号 昵称\"校\"", "price": 20, "url": "https://www.goofish.com/item?id=1039753375798"},
+    {"title": "私聊议价王者荣耀世界 ID:温隅", "price": 10, "url": "https://www.goofish.com/item?id=1039567348346"},
+    {"title": "王者荣耀世界 超级大帅哥昵称 亨利·卡维尔", "price": 10, "url": "https://www.goofish.com/item?id=1038645001941"},
+    {"title": "王者荣耀世界 ID KSG 安卓 QQ 区极品号", "price": 9, "url": "https://www.goofish.com/item?id=1036976695413"},
+    {"title": "王者荣耀世界 PC 端公测稀有昵称\"锐龙\"出售！", "price": 10, "url": "https://www.goofish.com/item?id=1039664150970"},
+    {"title": "出王者荣耀世界 PC 端公测账号，官方渠道来的", "price": 9, "url": "https://www.goofish.com/item?id=1039195162008"},
+    {"title": "王者荣耀世界 角色昵称：一寸灰（全职高手里的角色）", "price": 9, "url": "https://www.goofish.com/item?id=1039413952416"},
+    {"title": "王者荣耀世界极品 id 小爱咪 稀有昵称", "price": 9, "url": "https://www.goofish.com/item?id=1036943415227"},
+    {"title": "王者荣耀世界｜伽罗角色｜PC 端公测专属", "price": 8, "url": "https://www.goofish.com/item?id=1037685482517"},
+    {"title": "【王者荣耀世界服】PC 端公测账号", "price": 520, "url": "https://www.goofish.com/item?id=1040200586462"},
+    {"title": "王者荣耀世界 id，虚拟商品，直接发", "price": 999, "url": "https://www.goofish.com/item?id=1040190434804"},
+    {"title": "王者荣耀世界极品 id\"法语\"", "price": 5, "url": "https://www.goofish.com/item?id=1036910243700"},
+    {"title": "王者荣耀世界账号｜伽罗角色｜PC 端公测号", "price": 5, "url": "https://www.goofish.com/item?id=1039590652337"},
+    {"title": "王者世界 ID 估价", "price": 1, "url": "https://www.goofish.com/item?id=1040790284144"},
+    {"title": "王者荣耀世界 ID：愿神，PC 端公测用的", "price": 5, "url": "https://www.goofish.com/item?id=1039239105661"},
+    {"title": "王者荣耀世界账号，PC 端公测用", "price": 5, "url": "https://www.goofish.com/item?id=1038199055063"},
+    {"title": "王者荣耀世界账号，昵称：月帝，PC 端公测账号", "price": 4, "url": "https://www.goofish.com/item?id=1039460524021"},
+    {"title": "秒上王者荣耀世界帮打红 buff 拿限定 s 级称号狂暴模式", "price": 2, "url": "https://www.goofish.com/item?id=1037508010996"},
+    {"title": "出王者荣耀世界呢称暖男", "price": 3, "url": "https://www.goofish.com/item?id=1037821038936"},
+    {"title": "王者荣耀世界 极品单字 id 没有符号 连 QQ 号一起直出", "price": 3, "url": "https://www.goofish.com/item?id=1039819449773"},
+    {"title": "王者荣耀世界官方活动海报，PC 端公测定档 4 月 10 日", "price": 4, "url": "https://www.goofish.com/item?id=1039525284563"},
+    {"title": "出王者荣耀世界单字 id 无特殊符号", "price": 8, "url": "https://www.goofish.com/item?id=1036999615451"},
+    {"title": "王者荣耀世界 PC 端公测账号，4 月 10 号开服", "price": 5, "url": "https://www.goofish.com/item?id=1040712740078"}
+  ]
+}

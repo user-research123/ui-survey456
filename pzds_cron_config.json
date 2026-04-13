@@ -1,0 +1,22 @@
+{
+  "name": "盼之平台每日商品分析",
+  "schedule": {
+    "kind": "cron",
+    "expr": "0 10 * * *",
+    "tz": "Asia/Shanghai"
+  },
+  "payload": {
+    "kind": "agent",
+    "prompt": "\n请执行盼之平台《王者荣耀世界》每日商品数据分析任务：\n\n## 任务步骤\n\n### 步骤1：使用pzds-goods-crawler技能抓取数据\n激活技能 `pzds-goods-crawler`，从 https://www.pzds.com/goodsList/1547/6/headerSearch 抓取前100个商品信息。\n\n需要提取：\n1. 商品类型筛选栏选项（成品号、昵称、代肝等）\n2. 前100个商品的详细信息（标题、价格、平台、浏览量、想要数）\n\n### 步骤2：数据分析\n对收集的100个商品进行统计分析：\n- 价格分布：范围、中位数、高价商品占比(≥¥10,000)\n- 价格区间：0-500、500-1000、1000-5000、5000-10000、10000以上\n- 平台分布：安卓QQ、苹果QQ、安卓微信、苹果微信占比\n- 命名特征：单字ID、双字ID、三字ID、四字及以上ID数量及占比\n- 风格分类：霸气/中二、诗意/文学、可爱/萌系、明星/名人、其他\n\n输出格式参考：\n```\n数据分析数量: 100 个商品\n分析时间: MM-DD\n\n一、商品品类有：成品号、昵称 (hot)、代肝 (hot)\n\n二、账号的详细信息\n\n1）价格分布分析\n价格范围: ¥XX - ¥XX,XXX\n中位数价格: ¥X,XXX\n高价商品(≥¥10,000): X 个 (X.X%)\n\n2）价格区间分布\n0-500: XX 个 (XX.X%)\n500-1000: XX 个 (XX.X%)\n1000-5000: XX 个 (XX.X%)\n5000-10000: XX 个 (XX.X%)\n10000以上: XX 个 (XX.X%)\n\n3）平台分布\n安卓QQ: XX 个 (XX.X%)\n苹果QQ: XX 个 (XX.X%)\n安卓微信: XX 个 (XX.X%)\n苹果微信: XX 个 (XX.X%)\n\n4）命名特征\n单字ID: XX 个 (XX.X%)\n双字ID: XX 个 (XX.X%)\n三字ID: XX 个 (XX.X%)\n四字及以上ID: XX 个 (XX.X%)\n\n主要风格: XXX (XX%)、XXX (XX%)、XXX (XX%)\n```\n\n### 步骤3：更新GitHub Pages报告\n读取 `/Users/jiewen/.real/users/user-777da3823a68e71779b041c8e7807df0/workspace/wangzhe_report/index_with_tabs.html` 文件：\n1. 在日期切换按钮中添加今天日期的按钮（如\"4月7日\"）\n2. 添加今天日期的内容区块，包含盼之的分析报告\n3. 确保不影响螃蟹、闲鱼等其他竞品内容\n4. 保持HTML结构完整性\n\n### 步骤4：提交并推送\n执行以下Git命令：\n```bash\ncd /Users/jiewen/.real/users/user-777da3823a68e71779b041c8e7807df0/workspace/wangzhe_report\ngit add index_with_tabs.html\ngit commit -m \"更新MM月DD日盼之平台商品分析数据\"\ngit push\n```\n\n### 步骤5：交付产物\n使用 deliver_artifacts 交付以下文件：\n1. pzds_report_YYYYMMDD.txt - 盼之平台商品数据分析报告\n2. index_with_tabs.html - 已更新的GitHub Pages报告\n\n## 注意事项\n- 如果浏览器自动化遇到验证码或超时问题，增加等待时间或减少滚动次数\n- 如果数据不足100个，如实报告实际收集数量\n- 确保HTML文件的div标签配对正确\n- 不要修改螃蟹、闲鱼等其他竞品的内容区块\n",
+    "max_turns": 50
+  },
+  "delivery": {
+    "dingtalk": {
+      "webhook_url": "https://oapi.dingtalk.com/robot/send?access_token=4871c47f3c1df3c4e2d6fba0121d584616c78d17deae78aca48fba07d8556554",
+      "keyword": "悟空",
+      "message_template": "✅ 盼之平台每日商品分析已完成\n📅 执行时间: {time}\n📊 分析数据: {count} 个商品\n💰 中位数价格: ¥{median_price}"
+    }
+  },
+  "delete_after_run": false,
+  "enabled": true
+}

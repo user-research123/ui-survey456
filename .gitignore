@@ -19,6 +19,19 @@ ENV/
 .DS_Store
 Thumbs.db
 
+# 系统日志
+.rewind_shell/
+.rewind_parsefile/
+.rewind_webfetch/
+
+# 子仓库（独立 Git 项目）
+ui-survey-new/
+ui-survey/
+ui-survey123/
+wangzhe_report/
+wangzhe_report_repo/
+wangzhe_report_temp/
+
 # 敏感信息（如果需要）
 # config.py
 # .env

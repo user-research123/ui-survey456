@@ -1,0 +1,27 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  ui-survey-service:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Name: ui-survey-backend
+      Description: UI 调研问卷后端服务
+      LogConfig: Auto
+    ui-survey-function:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: index.handler
+        Runtime: python3.10
+        CodeUri: ./
+        MemorySize: 256
+        Timeout: 30
+        Description: 接收问卷提交数据
+        EnvironmentVariables:
+          # 在这里配置环境变量（或通过控制台配置）
+          DINGTALK_WEBHOOK: ''  # 可选：钉钉机器人 Webhook URL
+      Events:
+        http-trigger:
+          Type: HTTP
+          Properties:
+            AuthType: ANONYMOUS  # 允许匿名访问（前端可直接调用）
+            Methods: ['GET', 'POST', 'OPTIONS']

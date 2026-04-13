@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀世界 - 市场监控日报（带日期切换）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            /* 设置背景图片 */
+            background-image: url('./下载.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .summary-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .summary-section h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            background: #ecf0f1;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-button:hover {
+            background: #bdc3c7;
+        }
+        
+        .tab-button.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .date-section {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .date-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .platform-tag {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .data-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        ul li {
+            position: relative;
+            margin: 8px 0;
+        }
+        
+        ul li::before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>王者荣耀世界 - 市场监控日报</h1>
+            
+            <!-- 总结部分 -->
+            <div class="summary-section">
+                <h2>📊 04 月 08 日总结</h2>
+                <div class="data-item">
+                    <strong>官方活动：</strong>无
+                </div>
+                <div class="data-item">
+                    <strong>竞品动态：</strong>
+                    <ul>
+                        <li><strong>螃蟹：</strong>迅速跟进热门、单双字及角色 ID 的账号交易服务，并提供代练业务。其中账号价格区间：大部分集中在 50000+ 元（占 31%）</li>
+                        <li><strong>盼之：</strong>跟进账号和代练业务，价格分布：以 500-1000 元为主（占 0%）</li>
+                        <li><strong>闲鱼：</strong>提供代练、账号、抢注等服务，个人卖家居多，交易活跃</li>
+                    </ul>
+                </div>
+                <div class="data-item">
+                    <strong>用户需求：</strong>微博舆情分析
+                    <ul>
+                        <li>核心关注点：社交互动 (15%)、游戏内容 (15%)</li>
+                        <li>服务类需求：代练代肝 (9%) + 道具交易 (9%) = 19%，反映玩家对省时省力和资源获取的明显需求</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 榜单曲线图部分 -->
+            <div class="chart-section">
+                <h2>📈 云·王者荣耀世界 - 游戏 (免费) 榜单曲线图</h2>
+                <p style="margin-bottom: 15px; color: #7f8c8d;">数据统计周期：2026-04-01 至 2026-04-07</p>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 8px; text-align: center; margin: 20px 0;">
+                    <h3 style="color: #2c3e50; margin-bottom: 15px;">游戏 (免费)</h3>
+                    <div style="height: 300px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                        📊 榜单曲线图展示区域<br/>（此处嵌入 SVG 或 Chart.js 图表）
+                    </div>
+                </div>
+                
+                <p style="text-align: right; color: #7f8c8d; font-size: 14px;">数据来源：七麦数据</p>
+            </div>
+            
+            <!-- 官方事件部分 -->
+            <div class="chart-section">
+                <h2>🎮 1、游戏官方事件/活动</h2>
+                
+                <div class="date-section">
+                    <h3>📅 4 月 7 日</h3>
+                    <div class="data-item">
+                        《王者荣耀世界》PC 端预下载将于 4 月 7 日上午 10:00 开启
+                    </div>
+                </div>
+                
+                <div class="date-section">
+                    <h3>📅 4 月 1 日</h3>
+                    <div class="data-item">
+                        【王者荣耀世界】峡谷外相遇组队活动公告
+                    </div>
+                </div>
+                
+                <div class="date-section">
+                    <h3>📅 3 月 30 日</h3>
+                    <div class="data-item">
+                        《云·王者荣耀世界》抢先体验版精彩活动；正式开启！快来抢注你的《王者荣耀世界》昵称
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 竞品动态部分 -->
+            <div class="chart-section">
+                <h2>🏆 2、竞品动态追踪</h2>
+                
+                <!-- Tabs for dates -->
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab(event, 'tab-0408')">04 月 08 日</button>
+                    <button class="tab-button" onclick="switchTab(event, 'tab-0407')">04 月 07 日</button>
+                    <button class="tab-button" onclick="switchTab(event, 'tab-0406')">04 月 06 日</button>
+                    <button class="tab-button" onclick="switchTab(event, 'tab-0405')">04 月 05 日</button>
+                </div>
+                
+                <!-- Tab Content: 04 月 08 日 -->
+                <div id="tab-0408" class="tab-content active">
+                    <div class="date-section">
+                        <h3>📅 4 月 8 日</h3>
+                        
+                        <div class="data-item">
+                            <span class="platform-tag">螃蟹</span>
+                            <strong>螃蟹账号《王者荣耀世界》商品数据分析报告</strong>
+                            <p>数据总量：100 个商品 | 分析时间：04-08</p>
+                            <ul>
+                                <li><strong>商品类型：</strong>账号、代练、充值</li>
+                                <li><strong>价格范围：</strong>¥88 - ¥952,593</li>
+                                <li><strong>中位数价格：</strong>¥6,960</li>
+                                <li><strong>高价商品 (≥¥10,000)：</strong>41 个 (41.0%)</li>
+                                <li><strong>价格区间分布：</strong>0-500: 7 个 (7.0%), 500-1000: 8 个 (8.0%), 1000-5000: 26 个 (26.0%), 5000-10000: 18 个 (18.0%), 10000-50000: 10 个 (10.0%), 50000+: 31 个 (31.0%)</li>
+                                <li><strong>平台分布：</strong>QQ: 85 个 (85.0%), 微信：15 个 (15.0%)</li>
+                                <li><strong>命名特征：</strong>单字 ID: 34 个 (34.0%), 双字 ID: 18 个 (18.0%), 三字 ID: 19 个 (19.0%), 四字及以上 ID: 29 个 (29.0%)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-item">
+                            <span class="platform-tag">盼之</span>
+                            <strong>盼之平台《王者荣耀世界》商品数据分析报告</strong>
+                            <p>数据分析数量：95 个商品 | 分析时间：04-08</p>
+                            <ul>
+                                <li><strong>商品品类：</strong>成品号、昵称 (hot)、代肝 (hot)</li>
+                                <li><strong>价格范围：</strong>¥50 - ¥999,999</li>
+                                <li><strong>中位数价格：</strong>¥888</li>
+                                <li><strong>高价商品 (≥¥10,000)：</strong>6 个 (6.3%)</li>
+                                <li><strong>价格区间分布：</strong>0-500: 20 个 (21.1%), 500-1000: 48 个 (50.5%), 1000-5000: 12 个 (12.6%), 5000-10000: 9 个 (9.5%), 10000 以上：6 个 (6.3%)</li>
+                                <li><strong>平台分布：</strong>安卓微信：4 个 (4.2%), 苹果微信：2 个 (2.1%)</li>
+                                <li><strong>命名特征：</strong>单字 ID: 9 个 (9.5%), 双字 ID: 36 个 (37.9%), 三字 ID: 6 个 (6.3%), 四字及以上 ID: 44 个 (46.3%)</li>
+                                <li><strong>主要风格：</strong>其他 (92%)、可爱/萌系 (4%)、明星/名人 (3%)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-item">
+                            <span class="platform-tag">闲鱼</span>
+                            <strong>闲鱼平台《王者荣耀世界》商品数据分析报告</strong>
+                            <p>数据总量：30 个商品 | 分析时间：04-08</p>
+                            <ul>
+                                <li><strong>商品类型：</strong>账号交易、代肝服务、虚拟道具、ID 交易</li>
+                                <li><strong>价格范围：</strong>¥1 - ¥1,000 万</li>
+                                <li><strong>中位数价格：</strong>¥20</li>
+                                <li><strong>高价商品 (≥¥10,000)：</strong>2 个 (6.7%)</li>
+                                <li><strong>价格区间分布：</strong>0-50: 23 个 (76.7%), 50-100: 2 个 (6.7%), 100-500: 2 个 (6.7%), 500-1000: 1 个 (3.3%), 1000 以上：2 个 (6.7%)</li>
+                                <li><strong>平台分布：</strong>QQ 区：18 个 (60.0%), 微信区：2 个 (6.7%), 未指定：10 个 (33.3%)</li>
+                                <li><strong>命名特征：</strong>四字及以上 ID: 13 个 (43.3%), 双字 ID: 8 个 (26.7%), 三字 ID: 6 个 (20.0%), 单字 ID: 3 个 (10.0%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Content: 04 月 07 日 -->
+                <div id="tab-0407" class="tab-content">
+                    <div class="date-section">
+                        <h3>📅 4 月 7 日</h3>
+                        <div class="data-item">
+                            <span class="platform-tag">盼之</span>
+                            <strong>盼之平台《王者荣耀世界》商品数据分析报告</strong>
+                            <p>数据分析数量：100 个商品 | 分析时间：04-07</p>
+                            <ul>
+                                <li><strong>商品品类：</strong>成品号、昵称 (hot)、代肝 (hot)</li>
+                                <li><strong>价格范围：</strong>¥60 - ¥66,666</li>
+                                <li><strong>中位数价格：</strong>¥829</li>
+                                <li><strong>高价商品 (≥¥10,000)：</strong>6 个 (6.0%)</li>
+                                <li><strong>价格区间分布：</strong>0-500: 28 个 (28.0%), 500-1000: 39 个 (39.0%), 1000-5000: 17 个 (17.0%), 5000-10000: 10 个 (10.0%), 10000 以上：6 个 (6.0%)</li>
+                                <li><strong>平台分布：</strong>安卓 QQ: 72 个 (72.0%), 苹果 QQ: 21 个 (21.0%), 安卓微信：4 个 (4.0%), 苹果微信：3 个 (3.0%)</li>
+                                <li><strong>命名特征：</strong>双字 ID: 41 个 (41.0%), 其他：30 个 (30.0%), 单字 ID: 19 个 (19.0%), 四字及以上 ID: 5 个 (5.0%), 三字 ID: 5 个 (5.0%)</li>
+                                <li><strong>主要风格：</strong>其他 (70%)、诗意/文学类 (15%)、霸气/中二类 (10%)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-item">
+                            <span class="platform-tag">螃蟹</span>
+                            <strong>螃蟹账号《王者荣耀世界》商品数据分析报告</strong>
+                            <p>数据总量：98 个商品 | 分析时间：04-07</p>
+                            <ul>
+                                <li><strong>商品类型：</strong>账号、代练、充值</li>
+                                <li><strong>价格范围：</strong>¥150 - ¥1,888,888</li>
+                                <li><strong>中位数价格：</strong>¥7,502</li>
+                                <li><strong>高价商品 (≥¥10,000)：</strong>39 个 (39.8%)</li>
+                                <li><strong>价格区间分布：</strong>0-500: 6 个 (6.1%), 500-1000: 9 个 (9.2%), 1000-5000: 26 个 (26.5%), 5000-10000: 18 个 (18.4%), 10000-50000: 15 个 (15.3%), 50000+: 24 个 (24.5%)</li>
+                                <li><strong>平台分布：</strong>QQ: 85 个 (86.7%), 微信：13 个 (13.3%)</li>
+                                <li><strong>命名特征：</strong>单字 ID: 13 个 (13.3%), 双字 ID: 42 个 (42.9%)</li>
+                                <li><strong>主要风格：</strong>双字 ID</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="data-item">
+                            <span class="platform-tag">闲鱼</span>
+                            <strong>闲鱼平台商品分析 (2026 年 04 月 07 日)</strong>
+                            <p>数据概况：采集前 100 个商品信息</p>
+                            <ul>
+                                <li><strong>价格区间分布：</strong>0-10 元：3 个 (3%), 11-50 元：0 个 (0%), 51-100 元：9 个 (9%), 101-500 元：9 个 (9%), 501-1000 元：0 个 (0%), 1000 元以上：79 个 (79%)</li>
+                                <li><strong>价格中位数：</strong>¥6999</li>
+                                <li><strong>商品品类分布：</strong>普通 ID: 62 个 (62%), 极品 ID: 24 个 (24%), 账号：7 个 (7%), 其他：7 个 (7%)</li>
+                                <li><strong>ID 命名特征：</strong>单字 ID: 22 个，双字 ID: 6 个，情侣/CP ID: 3 个</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Content: 04 月 06 日 -->
+                <div id="tab-0406" class="tab-content">
+                    <div class="date-section">
+                        <h3>📅 4 月 6 日</h3>
+                        <div class="data-item">
+                            <span class="platform-tag">螃蟹</span>
+                            <strong>螃蟹账号《王者荣耀世界》商品数据分析报告</strong>
+                            <p>数据总量：96 个商品 | 分析时间：04-06</p>
+                            <ul>
+                                <li><strong>商品类型：</strong>账号、代练、充值</li>
+                                <li><strong>价格范围：</strong>¥130 - ¥1,999,992</li>
+                                <li><strong>中位数价格：</strong>¥8,003</li>
+                                <li><strong>高价商品 (≥¥10,000)：</strong>41 个 (42.7%)</li>
+                                <li><strong>价格区间分布：</strong>0-500: 5 个 (5.2%), 500-1000: 8 个 (8.3%), 1000-5000: 25 个 (26.0%), 5000-10000: 17 个 (17.7%), 10000-50000: 16 个 (16.7%), 50000+: 25 个 (26.0%)</li>
+                                <li><strong>平台分布：</strong>QQ: 83 个 (86.5%), 微信：13 个 (13.5%)</li>
+                                <li><strong>命名特征：</strong>单字 ID: 12 个 (12.5%), 双字 ID: 44 个 (45.8%)</li>
+                                <li><strong>主要风格：</strong>双字 ID</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Content: 04 月 05 日 -->
+                <div id="tab-0405" class="tab-content">
+                    <div class="date-section">
+                        <h3>📅 4 月 5 日</h3>
+                        <div class="data-item">
+                            <span class="platform-tag">螃蟹</span>
+                            <strong>螃蟹账号《王者荣耀世界》商品数据分析报告</strong>
+                            <p>数据总量：100 个商品 | 分析时间：04-05</p>
+                            <ul>
+                                <li><strong>商品类型：</strong>账号、代练、充值</li>
+                                <li><strong>价格范围：</strong>¥53 - ¥97,786</li>
+                                <li><strong>中位数价格：</strong>¥352</li>
+                                <li><strong>高价商品 (≥¥10,000)：</strong>6 个 (6.0%)</li>
+                                <li><strong>价格区间分布：</strong>0-500: 63 个 (63.0%), 500-1000: 16 个 (16.0%), 1000-5000: 8 个 (8.0%), 5000-10000: 7 个 (7.0%), 10000-50000: 2 个 (2.0%), 50000+: 4 个 (4.0%)</li>
+                                <li><strong>平台分布：</strong>QQ: 92 个 (92.0%), 微信：8 个 (8.0%)</li>
+                                <li><strong>命名特征：</strong>单字 ID: 15 个 (15.0%), 双字 ID: 39 个 (39.0%)</li>
+                                <li><strong>主要风格：</strong>双字 ID</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- 用户需求追踪部分 -->
+            <div class="chart-section">
+                <h2>📋 3、用户需求追踪</h2>
+                
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab(event, 'feedback-0408')">04 月 08 日</button>
+                    <button class="tab-button" onclick="switchTab(event, 'feedback-0407')">04 月 07 日</button>
+                </div>
+                
+                <!-- Feedback Tab: 04 月 08 日 -->
+                <div id="feedback-0408" class="tab-content active">
+                    <div class="date-section">
+                        <h3>📅 4 月 8 日 - 微博舆情分析</h3>
+                        <div class="data-item">
+                            <p><strong>前 5 页共 52 条帖子</strong></p>
+                            <ul>
+                                <li><strong>社交互动 (15.4%, 8 条)</strong> - 寻找队友、公会招募等社交需求</li>
+                                <li><strong>游戏内容 (15.4%, 8 条)</strong> - 时装、皮肤、副本、职业等游戏内内容</li>
+                                <li><strong>游戏攻略 (9.6%, 5 条)</strong> - 新手教程、玩法技巧</li>
+                                <li><strong>代练代肝 (9.6%, 5 条)</strong> - 代练、代肝等服务需求</li>
+                                <li><strong>道具交易 (9.6%, 5 条)</strong> - 账号、ID、道具等交易行为</li>
+                                <li><strong>同人创作 (9.6%, 5 条)</strong> - 同人图、小说、视频等创作内容</li>
+                            </ul>
+                            <div class="stat-highlight">
+                                <strong>核心发现：</strong>服务类需求明显：代练代肝 (9.6%) 和道具交易 (9.6%) 合计占 19.2%，反映玩家对省时省力和资源获取的需求
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feedback Tab: 04 月 07 日 -->
+                <div id="feedback-0407" class="tab-content">
+                    <div class="date-section">
+                        <h3>📅 4 月 7 日 - 微博舆情分析</h3>
+                        <div class="data-item">
+                            <p><strong>前 5 页共 60 条帖子</strong></p>
+                            <ul>
+                                <li><strong>游戏攻略 (18.3%, 11 条)</strong> - 新手教程、玩法技巧</li>
+                                <li><strong>同人创作 (16.7%, 10 条)</strong> - 同人画作、小说、视频等创作</li>
+                                <li><strong>道具交易 (13.3%, 8 条)</strong> - 账号、ID、道具等交易行为</li>
+                                <li><strong>社交互动 (11.7%, 7 条)</strong> - 寻找队友、公会招募等社交需求</li>
+                                <li><strong>游戏内容 (11.7%, 7 条)</strong> - 时装、皮肤、副本、职业等游戏内内容</li>
+                                <li><strong>代练代肝 (10.0%, 6 条)</strong> - 代练、代肝等服务需求</li>
+                            </ul>
+                            <div class="stat-highlight">
+                                <strong>核心发现：</strong>服务类需求明显：代练代肝 (10.0%) 和道具交易 (13.3%) 合计占 23.3%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        function switchTab(event, tabId) {
+            // 找到当前点击按钮所在的 tabs 容器
+            const tabsContainer = event.currentTarget.closest('.tabs');
+            
+            // 移除所有按钮的 active 状态
+            tabsContainer.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 添加当前按钮的 active 状态
+            event.currentTarget.classList.add('active');
+            
+            // 找到对应的内容区域并显示
+            const parentSection = tabsContainer.closest('.chart-section') || tabsContainer.closest('.summary-section');
+            parentSection.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
