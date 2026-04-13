@@ -1,35 +1,50 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-修复 HTML 报告总结部分的结构问题
+修复HTML文件结构并更新总结部分
 """
 
-import re
-
-html_file = '/Users/jiewen/.real/users/user-777da3823a68e71779b041c8e7807df0/workspace/wangzhe_report/index_with_tabs.html'
-
-# 读取 HTML 文件
-with open(html_file, 'r', encoding='utf-8') as f:
-    content = f.read()
-
-# 定义旧内容（错误的结构）
-old_pattern = r'(        <div class="content">\n            )04 月 08 日总结<br>.*?反映玩家对省时省力和资源获取的明显需求</div>\n            </div>'
-
-# 定义新内容（正确的结构）
-new_content = r'''\1<!-- 总结部分 -->
-            <div class="section">
-                <h2 class="section-title">总结</h2>
-                <div class="section-content">
-                    04 月 08 日总结<br>官方活动：无<br>竞品动态：<br>螃蟹：迅速跟进热门、单双字及角色 ID 的账号交易服务，并提供代练业务。其中账号价格区间：大部分集中在 50000+元（占 31%）<br>盼之：跟进账号和代练业务，价格分布：以 500-1000 元为主（占 0%）<br>闲鱼：提供代练、账号、抢注等服务，个人卖家居多，交易活跃<br>用户需求：微博舆情分析<br>核心关注点：社交互动 (15%)、游戏内容 (15%)；服务类需求：代练代肝 (9%) + 道具交易 (9%) = 19%，反映玩家对省时省力和资源获取的明显需求
+def fix_html_structure(html_file):
+    """修复HTML文件中的多余div标签并更新总结"""
+    
+    with open(html_file, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # 修复多余的div标签
+    # 查找并修复重复的<div class="competitor-card">
+    content = content.replace(
+        '''                <div class="competitor-card">
+                                    <div class="competitor-card">
+<div class="competitor-card">''',
+        '''                <div class="competitor-card">'''
+    )
+    
+    # 修复结尾多余的</div>
+    content = content.replace(
+        '''                </div>
                 </div>
-            </div>'''
 
-# 执行替换
-new_html = re.sub(old_pattern, new_content, content, flags=re.DOTALL)
+<div class="competitor-card">
+                    <div class="competitor-name">竞品三：闲鱼</div>''',
+        '''                </div>
 
-# 保存修改后的 HTML 文件
-with open(html_file, 'w', encoding='utf-8') as f:
-    f.write(new_html)
+                <div class="competitor-card">
+                    <div class="competitor-name">竞品三：闲鱼</div>'''
+    )
+    
+    # 更新总结部分中的盼之状态
+    old_summary = '盼之：数据获取中'
+    new_summary = '盼之：数据分析数量: 100 个商品，价格范围: ¥69 - ¥9,999,999，中位数价格: ¥888，高价商品(≥¥10,000): 16 个 (16.0%)；平台分布以QQ为主(100.0%)'
+    
+    content = content.replace(old_summary, new_summary)
+    
+    # 保存修复后的文件
+    with open(html_file, 'w', encoding='utf-8') as f:
+        f.write(content)
+    
+    print("HTML文件结构修复完成！")
+    print("总结部分已更新盼之状态")
 
-print("HTML 报告结构已修复！")
-print(f"文件路径：{html_file}")
+if __name__ == "__main__":
+    html_file = '/Users/jiewen/.real/users/user-777da3823a68e71779b041c8e7807df0/workspace/index_with_tabs.html'
+    fix_html_structure(html_file)

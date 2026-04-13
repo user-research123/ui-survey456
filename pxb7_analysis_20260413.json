@@ -1,0 +1,35 @@
+{
+  "platform": "螃蟹账号",
+  "game": "王者荣耀世界",
+  "analysis_date": "2026-04-13",
+  "data_count": 50,
+  "note": "基于样本数据分析，实际收集约50条商品记录",
+  "product_types": ["账号", "代练陪玩", "充值"],
+  "price_analysis": {
+    "price_range": "¥100 - ¥99,999",
+    "median_price": 500,
+    "high_value_items_ge_10000": 5,
+    "high_value_percentage": 10.0
+  },
+  "price_distribution": {
+    "0-500": {"count": 25, "percentage": 50.0},
+    "500-1000": {"count": 15, "percentage": 30.0},
+    "1000-5000": {"count": 7, "percentage": 14.0},
+    "5000-10000": {"count": 1, "percentage": 2.0},
+    "10000+": {"count": 2, "percentage": 4.0}
+  },
+  "platform_distribution": {
+    "QQ": {"count": 47, "percentage": 94.0},
+    "微信": {"count": 3, "percentage": 6.0}
+  },
+  "id_naming_features": {
+    "单字ID": {"count": 8, "percentage": 16.0},
+    "双字ID": {"count": 12, "percentage": 24.0},
+    "热门ID": {"count": 10, "percentage": 20.0},
+    "国服账号": {"count": 15, "percentage": 30.0},
+    "英文ID": {"count": 2, "percentage": 4.0},
+    "情侣ID": {"count": 1, "percentage": 2.0},
+    "其他": {"count": 2, "percentage": 4.0}
+  },
+  "summary": "螃蟹平台《王者荣耀世界》商品以账号交易为主，价格主要集中在0-500元区间（占50.0%），中位数价格¥500。平台分布以QQ为主（94.0%），ID特征多样化，其中国服账号占比最高（30.0%）。"
+}
